@@ -1,16 +1,24 @@
 # graduation_app
 
-A new Flutter project.
+# Design
+[design page](https://www.figma.com/file/6s9GEftmAa96wN6VscY5pw/Untitled?node-id=6%3A65)
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+# Instructions
 
-A few resources to get you started if this is your first Flutter project:
+- Do not push on the master branch
+- Make your own branch 
+- Make the name of your branch reflect the name of your task
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+ex:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+task name: auth_task
+
+branch name: auth_task
+
+# Tasks :
+##### Ahmed Osama -> registration screens { first four }
+
+##### Ahmed Bahgat -> add & edit team 
+
+##### Ebrahim Mohammed -> browse teams
