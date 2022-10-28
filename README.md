@@ -8,7 +8,7 @@
 
 - Do not push on the master branch
 - Make your own branch 
-- Make the name of your branch reflect the name of your task
+- Make the name of your branch reflect the name of your task or your name
 
 ex:
 
