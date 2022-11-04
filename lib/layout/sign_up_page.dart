@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login_app1/Controllers/SignUp_cubit/cubit/sign_up_cubit.dart';
+import 'package:login_app1/Controllers/SignUp_cubit/sign_up_cubit.dart';
 import 'package:login_app1/shared/components/constants.dart';
 
 import '../shared/components/components.dart';
