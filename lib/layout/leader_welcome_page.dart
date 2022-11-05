@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_app1/Controllers/Login_cubit/logincubit.dart';
 import 'package:login_app1/models/User.dart';
 import 'package:login_app1/shared/components/components.dart';
 import 'package:login_app1/shared/components/constants.dart';
@@ -40,7 +41,10 @@ class LeaderWelcomePage extends StatelessWidget {
                 ),
                 NavigateToOption(
                   name: "Browse Teams",
-                  onPressed: () {},
+                  onPressed: () {
+                    LoginCubit loginCubit = LoginCubit();
+                    loginCubit.postLogOutDetails();
+                  },
                 ),
               ],
             ),

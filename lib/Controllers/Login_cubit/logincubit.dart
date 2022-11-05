@@ -36,12 +36,20 @@ class LoginCubit extends Cubit<LoginStates> {
       print(error.response);
 
       message = error.response!.data["message"];
-      changestate();
+      emit(LoginResultState());
     }
     return message;
   }
 
-  void changestate() {
-    emit(LoginResultState());
+  Future postLogOutDetails() async {
+    try {
+      var response = await DioHelper.postdata(url: LOGOUT, headers: {
+        "Authorization": "Bearer " + User.token,
+        "Accept": "application/json"
+      });
+      print(response.data);
+    } catch (e) {
+      print(e);
+    }
   }
 }
