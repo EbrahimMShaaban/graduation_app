@@ -41,10 +41,7 @@ class LeaderWelcomePage extends StatelessWidget {
                 ),
                 NavigateToOption(
                   name: "Browse Teams",
-                  onPressed: () {
-                    LoginCubit loginCubit = LoginCubit();
-                    loginCubit.postLogOutDetails();
-                  },
+                  onPressed: () {},
                 ),
               ],
             ),
