@@ -1,7 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     package="com.example.graduation_app">
    <application
         android:label="graduation_app"
+=======
+    package="com.example.login_app1">
+          <uses-permission android:name="android.permission.INTERNET"/> 
+
+   <application
+        android:label="login_app1"
+>>>>>>> 66c0deb2e574842127031fba2f0edbcfe8b9ee62
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -31,4 +39,8 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 66c0deb2e574842127031fba2f0edbcfe8b9ee62
 </manifest>

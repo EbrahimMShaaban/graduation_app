@@ -4,8 +4,11 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+<<<<<<< HEAD
 	<key>CFBundleDisplayName</key>
 	<string>Graduation App</string>
+=======
+>>>>>>> 66c0deb2e574842127031fba2f0edbcfe8b9ee62
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +16,11 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
+<<<<<<< HEAD
 	<string>graduation_app</string>
+=======
+	<string>login_app1</string>
+>>>>>>> 66c0deb2e574842127031fba2f0edbcfe8b9ee62
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -43,7 +50,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+<<<<<<< HEAD
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+=======
+>>>>>>> 66c0deb2e574842127031fba2f0edbcfe8b9ee62
 </dict>
 </plist>
