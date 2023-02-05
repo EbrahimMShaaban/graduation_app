@@ -4,6 +4,7 @@ import './end_points.dart';
 
 class DioHelper {
   static late Dio dio;
+
   static init() {
     try {
       dio = Dio(
