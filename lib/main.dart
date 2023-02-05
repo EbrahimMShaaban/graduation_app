@@ -1,13 +1,15 @@
  import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:login_app1/layout/home/cubit/my_team_cubit.dart';
 import 'package:login_app1/shared/components/constants.dart';
 
 import 'layout/start_page.dart';
 import 'shared/network/remote/dio_helper.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await DioHelper.init();
-
   runApp(MyApp());
 }
 
@@ -23,12 +25,15 @@ class MyApp extends StatelessWidget {
       statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
       statusBarBrightness: Brightness.light, // For iOS (dark icons)
     ));
-    return MaterialApp(
+    return MultiBlocProvider(
+      providers: [
+      BlocProvider(create: (BuildContext context) => TeamCubit()..createTeam..getMyTeam,)
+    ], child:  MaterialApp(
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
           primaryColor: primarycolor,
           primarySwatch: materialColor,
         ),
-        home: StartPage());
+        home: StartPage()),);
   }
 }
