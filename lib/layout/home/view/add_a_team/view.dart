@@ -9,6 +9,8 @@ import '../../../../shared/components/navigator.dart';
 import '../../widgets/Text_Button.dart';
 import '../yourTeam/view.dart';
 
+List<String>? list = <String>['credit', 'general'];
+
 class AddTeam extends StatefulWidget {
   const AddTeam({Key? key}) : super(key: key);
 
@@ -18,8 +20,9 @@ class AddTeam extends StatefulWidget {
 
 class _AddTeamState extends State<AddTeam> {
   TextEditingController teamMembers = TextEditingController();
-  TextEditingController teamType = TextEditingController();
+  late String teamType ;
   TextEditingController teamNeeds = TextEditingController();
+  String? dropdownValue = list?.first;
 
   Widget addMembers() {
     return Row(
@@ -83,23 +86,28 @@ class _AddTeamState extends State<AddTeam> {
                 borderRadius: BorderRadius.all(
                     Radius.circular(30.0)), // set rounded corner radius
               ),
-              child: TextField(
-                textAlignVertical: TextAlignVertical.top,
-                controller: teamType,
-                style: TextStyle(
-                    fontSize: 20,
-                    height: 1.5,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black54),
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+              child: Center(
+                child: DropdownButton<String>(
+                  value: dropdownValue,
+                  elevation: 50,
+                  style: const TextStyle(color: Colors.black,fontSize: 25),
+
+                  onChanged: (String? value) {
+                    setState(() {
+                      dropdownValue = value!;
+                      print(value);
+                      teamType=value;
+                    });
+                    // This is called when the user selects an item.
+                  },
+                  items: list?.map<DropdownMenuItem<String>>((String value) {
+
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
                 ),
-                maxLines: 5,
-                // <-- SEE HERE
-                minLines: 1, //
-                // <
               ),
             ),
           ],
@@ -164,6 +172,7 @@ class _AddTeamState extends State<AddTeam> {
         print(state);
         if (state is CreateTeamSuccessState) {
 
+
           // Fluttertoast.showToast(
           //     msg: "وصلت يا رااايق",
           //     toastLength: Toast.LENGTH_SHORT,
@@ -182,6 +191,9 @@ class _AddTeamState extends State<AddTeam> {
     //           backgroundColor: Colors.red,
     //           textColor: Colors.white,
     //           fontSize: 16.0);
+
+
+          navigateAndFinished(context, YourTeamScreen());
         }
       },
       builder: (context, state) {
@@ -229,20 +241,19 @@ class _AddTeamState extends State<AddTeam> {
 
                             state is CreateTeamLoadingtState
                                 ? Center(
-                                    child: CircularProgressIndicator(color: primarycolor),
+                                    child: CircularProgressIndicator(
+                                        color: primarycolor),
                                   )
                                 : TextInkWell(
                                     text: "Submit",
-                                    onTap: () async{
+                                    onTap: () async {
                                       teamCubit.createTeam(
                                           teamMembers: teamMembers.text,
                                           teamNeeds: teamNeeds.text,
-                                          Type: teamType.text
-
-                                      );
-                                      if(state is CreateTeamSuccessState){
-                                        navigateAndFinished(context, YourTeamScreen());
-
+                                          Type: teamType);
+                                      if (state is CreateTeamSuccessState) {
+                                        navigateAndFinished(
+                                            context, YourTeamScreen());
                                       }
                                     },
                                     color: AppColors.blue,

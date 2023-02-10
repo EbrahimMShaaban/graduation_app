@@ -11,7 +11,7 @@ class DioHelper {
         BaseOptions(
             receiveDataWhenStatusError: true,
             baseUrl: BASEURL,
-         headers: {"Accept": "application/json"}
+         // headers: {"Accept": "application/json"}
           ),
       );
     } catch (e) {
