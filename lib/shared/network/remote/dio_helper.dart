@@ -4,13 +4,15 @@ import './end_points.dart';
 
 class DioHelper {
   static late Dio dio;
+
   static init() {
     try {
       dio = Dio(
         BaseOptions(
             receiveDataWhenStatusError: true,
             baseUrl: BASEURL,
-            headers: {"Accept": "application/json"}),
+         headers: {"Accept": "application/json"}
+          ),
       );
     } catch (e) {
       print(e.toString());
