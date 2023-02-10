@@ -44,11 +44,12 @@ class SignUpCubit extends Cubit<SignUpState> {
       }
       print(response);
     } catch (e) {
-      DioError error = e as DioError;
-      print(error.response);
+     // DioError error = e as DioError;
+      print(e);
 
-      message = error.response!.data["message"];
+     // message = error.response!.data["message"];
       emit(SignUpResultState());
+
     }
     return message;
   }

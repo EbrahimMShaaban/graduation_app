@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_app1/layout/browsing_teams/team_discription.dart';
 import 'package:login_app1/shared/components/components.dart';
 import 'package:login_app1/shared/components/constants.dart';
 import 'package:login_app1/shared/styles/styles.dart';
@@ -29,7 +30,12 @@ class TeamView extends StatelessWidget {
             child: ListView.builder(
                 itemCount: 20,
                 itemBuilder: (context, index) {
-                  return TeamsName(name: "name", onPressed: () {});
+                  return TeamsName(
+                      name: "name",
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => TeamDiscription()));
+                      });
                 }),
           ),
           Expanded(

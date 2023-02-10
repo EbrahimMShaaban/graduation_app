@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
             primaryColor: primarycolor,
             primarySwatch: materialColor,
           ),
-          home: AddTeam()),
+          home: StartPage()),
     );
   }
 }

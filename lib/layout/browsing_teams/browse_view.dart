@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_app1/layout/browsing_teams/teams_view.dart';
+import 'package:login_app1/shared/styles/colors.dart';
 
 import '../../models/User.dart';
 import '../../shared/components/components.dart';
@@ -21,12 +22,17 @@ class BrowseView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Welcome,",
+                    "Browse",
                     style: TextStyle(fontSize: 40),
                   ),
-                  Text("User.name",
+                  Text("Teams",
+
                       style:
                       TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+                  Text("2023/2024",
+
+                      style:
+                      TextStyle(fontSize: 35, fontWeight: FontWeight.bold,color:AppColors.background )),
                 ],
               ),
             ),
