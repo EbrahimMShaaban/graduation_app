@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:login_app1/layout/home/cubit/team_cubit.dart';
+import 'package:login_app1/models/User.dart';
 import 'package:login_app1/shared/components/constants.dart';
 import 'package:login_app1/shared/styles/colors.dart';
 import 'package:login_app1/shared/styles/mu_styal.dart';
@@ -10,14 +11,14 @@ import '../../../../shared/components/navigator.dart';
 import '../../widgets/Text_Button.dart';
 import '../yourTeam/view.dart';
 
-class AddTeam extends StatefulWidget {
-  const AddTeam({Key? key}) : super(key: key);
+class EditTeam extends StatefulWidget {
+  const EditTeam({Key? key}) : super(key: key);
 
   @override
-  State<AddTeam> createState() => _AddTeamState();
+  State<EditTeam> createState() => _EditTeamState();
 }
 
-class _AddTeamState extends State<AddTeam> {
+class _EditTeamState extends State<EditTeam> {
   TextEditingController teamMembers = TextEditingController();
   TextEditingController teamType = TextEditingController();
   TextEditingController teamNeeds = TextEditingController();
@@ -162,9 +163,7 @@ class _AddTeamState extends State<AddTeam> {
   Widget build(BuildContext context) {
     return BlocConsumer<TeamCubit, TeamStates>(
       listener: (context, state) {
-        print(state);
         if (state is CreateTeamSuccessState) {
-
           Fluttertoast.showToast(
               msg: "وصلت يا رااايق",
               toastLength: Toast.LENGTH_SHORT,
@@ -175,8 +174,8 @@ class _AddTeamState extends State<AddTeam> {
               fontSize: 16.0);
           navigateAndFinished(context, YourTeamScreen());
         } else {
-    Fluttertoast.showToast(
-              msg: "عااااااااااااااااااااااااااااااااااا",
+          if(state is CreateTeamErrorState) Fluttertoast.showToast(
+              msg: "${state.message}",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.CENTER,
               timeInSecForIosWeb: 5,
@@ -187,7 +186,9 @@ class _AddTeamState extends State<AddTeam> {
       },
       builder: (context, state) {
         TeamCubit? teamCubit = TeamCubit.get(context);
-
+        teamMembers.text=User.name;
+        teamNeeds.text=User.name;
+        teamType.text=User.name;
         return Scaffold(
             backgroundColor: AppColors.white,
             body: SingleChildScrollView(
@@ -222,7 +223,7 @@ class _AddTeamState extends State<AddTeam> {
                             TextInkWell(
                               text: "Return",
                               onTap: () {
-                                navigateTo(context, YourTeamScreen());
+                                Navigator.pop(context);
                               },
                               color: AppColors.greyDark,
                               container: false,
@@ -235,7 +236,7 @@ class _AddTeamState extends State<AddTeam> {
                                 : TextInkWell(
                                     text: "Submit",
                                     onTap: () async{
-                                      teamCubit.createTeam(
+                                      teamCubit!.createTeam(
                                           teamMembers: teamMembers.text,
                                           teamNeeds: teamNeeds.text,
                                           Type: teamType.text

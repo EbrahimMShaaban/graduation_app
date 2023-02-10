@@ -1,9 +1,9 @@
-class MyTeam {
+class CreateTeamModel {
   Team? team;
 
-  MyTeam({this.team});
+  CreateTeamModel({this.team});
 
-  MyTeam.fromJson(Map<String, dynamic> json) {
+  CreateTeamModel.fromJson(Map<String, dynamic> json) {
     team = json['team'] != null ? new Team.fromJson(json['team']) : null;
   }
 
