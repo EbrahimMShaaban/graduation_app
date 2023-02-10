@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 
 import '../../../../../shared/network/remote/dio_helper.dart';
 import '../../../../../shared/network/remote/end_points.dart';
+import '../../../models/CreateTeam.dart';
 import '../../../models/model_myteam.dart';
 
 part 'team_state.dart';
@@ -14,18 +15,26 @@ class TeamCubit extends Cubit<TeamStates> {
   TeamCubit() : super(TeamInitialState());
 
   static TeamCubit get(context) => BlocProvider.of(context);
+//   List<String> list = <String>['One', 'Two', 'Three', 'Four'];
+//   //String dropdownValue = TeamCubit().list.first;
+// typeChange(String v) {
+//
+//  // dropdownValue =v;
+//   emit(typeChangeState());
+// }
 
-  // CreateTeamModel? createTeamModel;
   MyTeam? myTeam;
 
   void getMyTeam() {
     print("111111111111111111111111111111111111111111dddddddd1111111");
 
     emit(MyTeamLoadingtState());
-    DioHelper.getdata(url: myTeams,      headers: {
-      'Content-type': 'application/json',
-      'Accept': 'application/json',
-    },
+    DioHelper.getdata(
+      url: myTeams,
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      },
     ).then((value) {
       myTeam = MyTeam.fromJson(value.data);
       print("111111111111111111111111111111111111111111dddddddd1111111");
@@ -40,28 +49,29 @@ class TeamCubit extends Cubit<TeamStates> {
       emit(MyTeamErrorState(message: error));
     });
   }
-
+  CreateTeamModel? createTeamModel;
   void createTeam({
-
     required String teamMembers,
     required String Type,
     required String teamNeeds,
-  }) async{
-
+  }) async {
+    print(teamMembers);
+    print(teamNeeds);
+    print(Type);
+    print("data 00000000000000000000000");
     emit(CreateTeamLoadingtState());
     await DioHelper.postdata(
       url: teams,
-      posteddata:{
+      posteddata: {
         "title": teamMembers,
         "body": teamNeeds,
         "type": Type,
       },
       headers: {
-        'Content-type': 'application/json',
+        'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': "Bearer 38|6u3CnJpAMNw0cUGUXTjQ71t1goTWr2PKRy6iGOnz",
+       // / 'Authorization': "Bearer 44|RMR6mXbmJI3zOm7NxqTwxW0oDoQhvA5NZkNno1pN",
       },
-
     ).then((value) {
       emit(CreateTeamSuccessState());
     }).catchError((error) {
