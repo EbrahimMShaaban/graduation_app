@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:login_app1/Controllers/Login_cubit/logincubit.dart';
-import 'package:login_app1/models/User.dart';
-import 'package:login_app1/shared/components/components.dart';
-import 'package:login_app1/shared/components/constants.dart';
+import 'package:login_app1/layout/browsing_teams/teams_view.dart';
 
-class LeaderWelcomePage extends StatelessWidget {
-  LeaderWelcomePage({Key? key}) : super(key: key);
+import '../../models/User.dart';
+import '../../shared/components/components.dart';
+
+class BrowseView extends StatelessWidget {
+  const BrowseView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,9 @@ class LeaderWelcomePage extends StatelessWidget {
                     "Welcome,",
                     style: TextStyle(fontSize: 40),
                   ),
-                  Text(User.name,
+                  Text("User.name",
                       style:
-                          TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+                      TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
@@ -36,11 +36,14 @@ class LeaderWelcomePage extends StatelessWidget {
             Column(
               children: [
                 NavigateToOption(
-                  name: "Your Team",
-                  onPressed: () {},
+                  name: "General",
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => TeamView()));
+                  },
                 ),
                 NavigateToOption(
-                  name: "Browse Teams",
+                  name: "Credit",
                   onPressed: () {},
                 ),
               ],
@@ -51,4 +54,3 @@ class LeaderWelcomePage extends StatelessWidget {
     );
   }
 }
-
