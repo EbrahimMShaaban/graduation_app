@@ -4,6 +4,7 @@ part of 'team_cubit.dart';
 abstract class TeamStates {}
 
 
+class typeChangeState extends TeamStates{}
 class TeamInitialState extends TeamStates{}
 class CreateTeamLoadingtState extends TeamStates{}
 class CreateTeamSuccessState extends TeamStates{
