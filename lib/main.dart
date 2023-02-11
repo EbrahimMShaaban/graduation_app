@@ -34,7 +34,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (BuildContext context) => TeamCubit()
             ..createTeam
-            ..getMyTeam,
+            ..getMyTeam
+            ..getAllTeams,
         )
       ],
       child: MaterialApp(
