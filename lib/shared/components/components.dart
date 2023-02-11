@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_app1/shared/components/constants.dart';
+import 'package:login_app1/shared/styles/styles.dart';
 
 class ButtonTemplate extends StatelessWidget {
   ButtonTemplate({
@@ -19,6 +20,7 @@ class ButtonTemplate extends StatelessWidget {
   double minwidth;
   double fontSize;
   void Function()? onPressed;
+
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
@@ -53,6 +55,7 @@ class TextFieldTemplate extends StatelessWidget {
   String hintText;
   TextEditingController controller;
   bool obscureText;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -132,4 +135,95 @@ void showMyDialog(String _message, BuildContext context) async {
           ],
         );
       });
+}
+
+///
+
+class NavigateToOption extends StatelessWidget {
+  NavigateToOption({Key? key, required this.name, required this.onPressed})
+      : super(key: key);
+  String name;
+  void Function()? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0),
+      child: SizedBox(
+        height: 70,
+        width: 320,
+        child: Material(
+          color: Colors.grey[100],
+          borderRadius: BorderRadius.circular(20),
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
+            child: Row(
+              children: [
+                Text(name,
+                    style:
+                        TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                Spacer(),
+                SizedBox(
+                  width: 40,
+                  height: 40,
+                  child: MaterialButton(
+                      padding: EdgeInsets.zero,
+                      color: primarycolor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Icon(
+                        Icons.arrow_forward,
+                        color: Colors.white,
+                      ),
+                      onPressed: onPressed),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class TeamsName extends StatelessWidget {
+  TeamsName({Key? key, required this.name, required this.onPressed})
+      : super(key: key);
+  String name;
+  void Function()? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0),
+      child: Container(
+      //  color: Colors.red,
+
+        height: 70,
+        width: 1,
+        child: MaterialButton(
+
+            padding: EdgeInsets.zero,
+            color: Colors.grey[100],
+            shape: RoundedRectangleBorder(
+
+                borderRadius: BorderRadius.circular(20)),
+
+            child:  RichText(
+              text: TextSpan(
+                text: name,
+                style: AppTextStyles.w300.apply(color: Colors.black,),
+
+                children: const <TextSpan>[
+                  TextSpan(text: ' bold', style: AppTextStyles.lrTitles),
+
+                ],
+              ),
+            ),
+            onPressed: onPressed),
+      ),
+    );
+  }
 }

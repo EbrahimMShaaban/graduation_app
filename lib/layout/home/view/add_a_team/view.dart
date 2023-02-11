@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:login_app1/layout/home/cubit/team_cubit.dart';
 import 'package:login_app1/shared/components/constants.dart';
 import 'package:login_app1/shared/styles/colors.dart';
@@ -172,24 +171,29 @@ class _AddTeamState extends State<AddTeam> {
       listener: (context, state) {
         print(state);
         if (state is CreateTeamSuccessState) {
-          Fluttertoast.showToast(
-              msg: "وصلت يا رااايق",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 5,
-              backgroundColor: Colors.green,
-              textColor: Colors.white,
-              fontSize: 16.0);
+
+
+          // Fluttertoast.showToast(
+          //     msg: "وصلت يا رااايق",
+          //     toastLength: Toast.LENGTH_SHORT,
+          //     gravity: ToastGravity.CENTER,
+          //     timeInSecForIosWeb: 5,
+          //     backgroundColor: Colors.green,
+          //     textColor: Colors.white,
+          //     fontSize: 16.0);
           navigateAndFinished(context, YourTeamScreen());
         } else {
-          Fluttertoast.showToast(
-              msg: "عااااااااااااااااااااااااااااااااااا",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 5,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0);
+    // Fluttertoast.showToast(
+    //           msg: "عااااااااااااااااااااااااااااااااااا",
+    //           toastLength: Toast.LENGTH_SHORT,
+    //           gravity: ToastGravity.CENTER,
+    //           timeInSecForIosWeb: 5,
+    //           backgroundColor: Colors.red,
+    //           textColor: Colors.white,
+    //           fontSize: 16.0);
+
+
+          navigateAndFinished(context, YourTeamScreen());
         }
       },
       builder: (context, state) {

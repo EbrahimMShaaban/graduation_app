@@ -64,7 +64,8 @@ class SignInPage extends StatelessWidget {
                           color: primarycolor,
                         ));
                       } else {
-                        return ButtonTemplate(
+                        return
+                        ButtonTemplate(
                           color: primarycolor,
                           minwidth: 190,
                           text1: "Sign In",
@@ -87,7 +88,7 @@ class SignInPage extends StatelessWidget {
                             });
                           },
                         );
-                      }
+                     }
                     },
                   ),
                 ],

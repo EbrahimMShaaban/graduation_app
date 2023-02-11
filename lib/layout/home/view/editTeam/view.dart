@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:login_app1/layout/home/cubit/team_cubit.dart';
 import 'package:login_app1/models/User.dart';
 import 'package:login_app1/shared/components/constants.dart';
@@ -164,24 +163,24 @@ class _EditTeamState extends State<EditTeam> {
     return BlocConsumer<TeamCubit, TeamStates>(
       listener: (context, state) {
         if (state is CreateTeamSuccessState) {
-          Fluttertoast.showToast(
-              msg: "وصلت يا رااايق",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 5,
-              backgroundColor: Colors.green,
-              textColor: Colors.white,
-              fontSize: 16.0);
+          // Fluttertoast.showToast(
+          //     msg: "وصلت يا رااايق",
+          //     toastLength: Toast.LENGTH_SHORT,
+          //     gravity: ToastGravity.CENTER,
+          //     timeInSecForIosWeb: 5,
+          //     backgroundColor: Colors.green,
+          //     textColor: Colors.white,
+          //     fontSize: 16.0);
           navigateAndFinished(context, YourTeamScreen());
         } else {
-          if(state is CreateTeamErrorState) Fluttertoast.showToast(
-              msg: "${state.message}",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 5,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0);
+          // if(state is CreateTeamErrorState) Fluttertoast.showToast(
+          //     msg: "${state.message}",
+          //     toastLength: Toast.LENGTH_SHORT,
+          //     gravity: ToastGravity.CENTER,
+          //     timeInSecForIosWeb: 5,
+          //     backgroundColor: Colors.red,
+          //     textColor: Colors.white,
+          //     fontSize: 16.0);
         }
       },
       builder: (context, state) {
