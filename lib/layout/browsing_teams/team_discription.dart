@@ -1,82 +1,76 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login_app1/layout/home/view/editTeam/view.dart';
-import 'package:login_app1/models/model_myteam.dart';
-import 'package:login_app1/shared/components/navigator.dart';
 
-import '../../../../shared/styles/colors.dart';
 import '../../../../shared/styles/mu_styal.dart';
+import '../../models/allteams_model.dart';
 import '../home/cubit/team_cubit.dart';
 
+class TeamDiscription extends StatelessWidget {
+  TeamDiscription(
+      {required this.allTeams,
+      //required this.teams,
+      Key? key})
+      : super(key: key);
 
-class TeamDiscription extends StatefulWidget {
-  const TeamDiscription({Key? key}) : super(key: key);
+  // Teams? teams;
+  final Teams? allTeams;
 
-  @override
-  State<TeamDiscription> createState() => _TeamDiscriptionState();
-}
-
-class _TeamDiscriptionState extends State<TeamDiscription> {
-  Widget screenView(
-     // MyTeam? data
-  )
-  {
+  Widget screenView(BuildContext context
+      // MyTeam? data
+      ) {
     return SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Your Team",
-                style: boldStyle,
-              ),
-              SizedBox(
-                height: 10,
-              ),
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '${allTeams?.attributes?.title}',
+            style: boldStyle,
+          ),
+          SizedBox(
+            height: 10,
+          ),
 
+          Text(
+            'Team Description',
+            style: mediumStyle,
+          ),
 
+          // Team member
+          Text(
+            '${allTeams?.attributes?.body}',
+            style: labelStyle,
+          ),
 
-              Text(
-                'Team Description :',
-                style: mediumStyle,
-              ),
+          //Team Needs
 
-              // Team member
-              Text(
-                " ${"data?.team?.attributes?.body"}",
-                style: labelStyle,
-              ),
-
-              //Team Needs
-
-              // Expanded(
-              //   child: Align(
-              //     alignment: FractionalOffset.bottomCenter,
-              //     child: Button(),
-              //   ),
-              // ),
-              //Button
-              Expanded(
-                child: SizedBox(
-                  height: 50,
-                  child: Center(
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text("return"),
-                      ),
-                    ),
+          // Expanded(
+          //   child: Align(
+          //     alignment: FractionalOffset.bottomCenter,
+          //     child: Button(),
+          //   ),
+          // ),
+          //Button
+          Expanded(
+            child: SizedBox(
+              height: 50,
+              child: Center(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("return"),
                   ),
                 ),
-              )
-            ],
-          ),
-        ));
+              ),
+            ),
+          )
+        ],
+      ),
+    ));
   }
 
   // Widget Button() {
@@ -120,11 +114,11 @@ class _TeamDiscriptionState extends State<TeamDiscription> {
         // TODO: implement listener
       },
       builder: (context, state) {
-      //  var data = TeamCubit.get(context).myTeam;
+        //  var data = TeamCubit.get(context).myTeam;
         return Scaffold(
-      //    body: data != null ?
-          body: screenView(),
-        //      : Center(child: CircularProgressIndicator()),
+          //    body: data != null ?
+          body: screenView(context),
+          //      : Center(child: CircularProgressIndicator()),
         );
       },
     );

@@ -52,17 +52,15 @@ class TeamCubit extends Cubit<TeamStates> {
       emit(MyTeamErrorState(message: error));
     });
   }
-  void getAllTeams() {
-    print("111111111111111111111111111111111111111111dddddddd1111111");
+  void getAllTeams({required bool type}) {
 
     emit(AllTeamsLoadingtState());
     DioHelper.getdata(
-      url: allTeams,
+      url: type?allgeneralTeams:allcreditTeams,
       headers: {
         'Content-type': 'application/json',
         'Accept': 'application/json',
       },
-
     ).then((value) {
       allTeamsmodel = AllTeams.fromJson(value.data);
       print("111111111111111111111111111111111111111111dddddddd1111111");

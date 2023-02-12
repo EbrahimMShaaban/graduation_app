@@ -30,7 +30,10 @@ class MyTeamErrorState extends TeamStates{
 
   MyTeamErrorState({required this.message});
 
-}class AllTeamsLoadingtState extends TeamStates{}
+}class AllTeamsLoadingtState extends TeamStates{
+
+
+}
 class AllTeamsSuccessState extends TeamStates{
 
   // late final AllTeamModel loginModel;
