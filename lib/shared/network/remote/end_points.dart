@@ -3,4 +3,4 @@ const SIGNUP = 'register';
 const LOGIN = 'login';
 const LOGOUT = 'logout';
 const teams = 'teams';
-const myTeams = 'teams/1';
+const myTeams = 'teams/';

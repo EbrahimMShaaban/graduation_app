@@ -1,68 +1,38 @@
 class CreateTeamModel {
-  Team? team;
-
-  CreateTeamModel({this.team});
-
+  late Team team;
   CreateTeamModel.fromJson(Map<String, dynamic> json) {
-    team = json['team'] != null ? new Team.fromJson(json['team']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.team != null) {
-      data['team'] = this.team!.toJson();
-    }
-    return data;
+    // team = json['team'] != null ? new Team.fromJson(json['team']) : null;
+    team = Team.fromJson(json['team']);
   }
 }
 
 class Team {
-  String? id;
-  Attributes? attributes;
+  late String id ="1";
+  late Attributes attributes;
 
-
-  Team({this.id, this.attributes, });
 
   Team.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    attributes = json['attributes'] != null
-        ? new Attributes.fromJson(json['attributes'])
-        : null;
-
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    if (this.attributes != null) {
-      data['attributes'] = this.attributes!.toJson();
-    }
-
-    return data;
+    // attributes = json['attributes'] != null
+    //     ? new Attributes.fromJson(json['attributes'])
+    //     : null;
+    attributes =Attributes.fromJson(json['attributes']);
   }
 }
 
 class Attributes {
-  String? name;
-  String? body;
-  String? createdAt;
-  String? updatedAt;
-
-  Attributes({this.name, this.body, this.createdAt, this.updatedAt});
+  late String title;
+  late String body;
+  late String type;
 
   Attributes.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
+    title = json['title'];
     body = json['body'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['body'] = this.body;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    return data;
+    type = json['type'];
+    // print(title);
+    // print(body);
+    // print(
+    //     "999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999");
+    // print(type);
   }
 }

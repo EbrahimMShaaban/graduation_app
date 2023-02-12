@@ -26,29 +26,48 @@ class TeamCubit extends Cubit<TeamStates> {
   MyTeam? myTeam;
 
   void getMyTeam() {
-    print("111111111111111111111111111111111111111111dddddddd1111111");
 
     emit(MyTeamLoadingtState());
     DioHelper.getdata(
-      url: myTeams,
+      url: myTeams+"1",
       headers: {
         'Content-type': 'application/json',
         'Accept': 'application/json',
       },
     ).then((value) {
       myTeam = MyTeam.fromJson(value.data);
-      print("111111111111111111111111111111111111111111dddddddd1111111");
-      print(myTeam!.team?.attributes?.body);
+      // print("111111111111111111111111111111111111111111dddddddd1111111");
+      // print(myTeam!.team.attributes.body);
+      // print(myTeam!.team.id);
 
       emit(MyTeamSuccessState());
     }).catchError((error) {
       print(error);
-      print(myTeam!.team?.attributes?.title);
-
-      print("00000000000000000000000000000");
+      // print(myTeam!.team.attributes.title);
+      // print("00000000000000000000000ddddddddddddddddddddddd000000");
       emit(MyTeamErrorState(message: error));
     });
   }
+  void DeletMyTeam() {
+
+    print(myTeams+myTeam!.team.id);
+    emit(DeletLoadingtState());
+    DioHelper.deletedata(
+      url: myTeams+myTeam!.team.id, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      // 'Authorization': "Bearer 54|Qlh6XJgwyks9YxRz76vD4wYw6KCoB4x4NhSVi21Z",
+    },
+    ).then((value) {
+
+      emit(DeletSuccessState());
+    }).catchError((error) {
+      print(error);
+      emit(DeletErrorState());
+    });
+  }
+
+
   CreateTeamModel? createTeamModel;
   void createTeam({
     required String teamMembers,
@@ -58,7 +77,6 @@ class TeamCubit extends Cubit<TeamStates> {
     print(teamMembers);
     print(teamNeeds);
     print(Type);
-    print("data 00000000000000000000000");
     emit(CreateTeamLoadingtState());
     await DioHelper.postdata(
       url: teams,
@@ -70,9 +88,12 @@ class TeamCubit extends Cubit<TeamStates> {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-       // / 'Authorization': "Bearer 44|RMR6mXbmJI3zOm7NxqTwxW0oDoQhvA5NZkNno1pN",
+     'Authorization': "Bearer 64|UCNWcKCO7ARYZmGsM3VWAy0FzWbcN98XXCaE3fl4",
       },
     ).then((value) {
+      createTeamModel= CreateTeamModel.fromJson(value.data);
+      print(createTeamModel?.team.id);
+      print(createTeamModel?.team.id);
       emit(CreateTeamSuccessState());
     }).catchError((error) {
       print(User.token);
@@ -81,4 +102,40 @@ class TeamCubit extends Cubit<TeamStates> {
       emit(CreateTeamErrorState(message: error));
     });
   }
+
+
+  void EditTeam({
+    required String teamMembers,
+    required String Type,
+    required String teamNeeds,
+  }) async {
+    print(teamMembers);
+    print(teamNeeds);
+    print(Type);
+    emit(CreateTeamLoadingtState());
+    await DioHelper.postdata(
+      url: myTeams+'19',
+      posteddata: {
+        "title": teamMembers,
+        "body": teamNeeds,
+        "type": Type,
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+     'Authorization': "Bearer 64|UCNWcKCO7ARYZmGsM3VWAy0FzWbcN98XXCaE3fl4",
+      },
+    ).then((value) {
+      createTeamModel= CreateTeamModel.fromJson(value.data);
+      emit(CreateTeamSuccessState());
+
+    }).catchError((error) {
+      print(User.token);
+      print(error.toString());
+
+      emit(CreateTeamErrorState(message: error));
+    });
+  }
+
+
 }

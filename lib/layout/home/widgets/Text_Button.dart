@@ -5,7 +5,7 @@ import '../../../shared/styles/colors.dart';
 class TextInkWell extends StatelessWidget {
   final String text;
   final Color color;
-  final Function onTap;
+  final Function()? onTap;
   final bool container;
 
   TextInkWell({required this.text, required this.onTap, required this.color, required this.container});
@@ -13,9 +13,7 @@ class TextInkWell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () {
-          onTap();
-        },
+        onTap:onTap,
 
         child:
         container==true? Container(
