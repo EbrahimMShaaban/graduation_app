@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_app1/models/User.dart';
+import 'package:login_app1/models/allteams_model.dart';
 
 import 'package:meta/meta.dart';
 
@@ -15,6 +16,7 @@ class TeamCubit extends Cubit<TeamStates> {
   TeamCubit() : super(TeamInitialState());
 
   static TeamCubit get(context) => BlocProvider.of(context);
+
 //   List<String> list = <String>['One', 'Two', 'Three', 'Four'];
 //   //String dropdownValue = TeamCubit().list.first;
 // typeChange(String v) {
@@ -24,6 +26,7 @@ class TeamCubit extends Cubit<TeamStates> {
 // }
 
   MyTeam? myTeam;
+  AllTeams? allTeamsmodel;
 
   void getMyTeam() {
 
@@ -48,6 +51,7 @@ class TeamCubit extends Cubit<TeamStates> {
       emit(MyTeamErrorState(message: error));
     });
   }
+
   void DeletMyTeam() {
 
     print(myTeams+myTeam!.team.id);
@@ -64,6 +68,32 @@ class TeamCubit extends Cubit<TeamStates> {
     }).catchError((error) {
       print(error);
       emit(DeletErrorState());
+    });
+  }
+
+
+
+  void getAllTeams({required bool type}) {
+
+    emit(AllTeamsLoadingtState());
+    DioHelper.getdata(
+      url: type?allgeneralTeams:allcreditTeams,
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      },
+    ).then((value) {
+      allTeamsmodel = AllTeams.fromJson(value.data);
+      print("111111111111111111111111111111111111111111dddddddd1111111");
+    //  print(allTeamsmodel!.team?.attributes?.body);
+
+      emit(AllTeamsSuccessState());
+    }).catchError((error) {
+      print(error);
+      print(allTeamsmodel!.teams?[1].attributes?.type);
+
+      print("00000000000000000000000000000");
+      emit(AllTeamsErrorState(message: error));
     });
   }
 

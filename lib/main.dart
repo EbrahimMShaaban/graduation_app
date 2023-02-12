@@ -27,8 +27,15 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (BuildContext context) => TeamCubit()..createTeam..getMyTeam()..EditTeam
-            // ..createTeam,
+
+
+
+
+          create: (BuildContext context) => TeamCubit()
+            ..createTeam
+           // ..getMyTeam()
+           // ..getAllTeams(),
+
         )
       ],
       child: MaterialApp(
@@ -38,7 +45,10 @@ class MyApp extends StatelessWidget {
             primaryColor: primarycolor,
             primarySwatch: materialColor,
           ),
+
           home: DontHaveTeame()),
+
+
     );
   }
 }

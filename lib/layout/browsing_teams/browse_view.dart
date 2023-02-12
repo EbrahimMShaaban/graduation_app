@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:login_app1/Controllers/Login_cubit/logincubit.dart';
-import 'package:login_app1/layout/home/view/add_a_team/view.dart';
-import 'package:login_app1/layout/home/view/yourTeam/view.dart';
-import 'package:login_app1/models/User.dart';
-import 'package:login_app1/models/model_myteam.dart';
-import 'package:login_app1/shared/components/components.dart';
-import 'package:login_app1/shared/components/constants.dart';
-import 'package:login_app1/shared/components/navigator.dart';
+import 'package:login_app1/layout/browsing_teams/teams_view.dart';
+import 'package:login_app1/shared/styles/colors.dart';
 
-class LeaderWelcomePage extends StatelessWidget {
-  LeaderWelcomePage({Key? key}) : super(key: key);
+import '../../models/User.dart';
+import '../../shared/components/components.dart';
+
+class BrowseView extends StatelessWidget {
+  const BrowseView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +22,17 @@ class LeaderWelcomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Welcome,",
+                    "Browse",
                     style: TextStyle(fontSize: 40),
                   ),
-                  Text(User.name,
+                  Text("Teams",
+
                       style:
-                          TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+                      TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+                  Text("2023/2024",
+
+                      style:
+                      TextStyle(fontSize: 35, fontWeight: FontWeight.bold,color:AppColors.background )),
                 ],
               ),
             ),
@@ -40,15 +42,17 @@ class LeaderWelcomePage extends StatelessWidget {
             Column(
               children: [
                 NavigateToOption(
-                  name: "Your Team",
+                  name: "General",
                   onPressed: () {
-                    navigateTo(context, AddTeam());
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => TeamView(type: true,)));
                   },
                 ),
                 NavigateToOption(
-                  name: "Browse Teams",
+                  name: "Credit",
                   onPressed: () {
-                    navigateTo(context, YourTeamScreen());
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => TeamView(type: false,)));
                   },
                 ),
               ],
@@ -59,4 +63,3 @@ class LeaderWelcomePage extends StatelessWidget {
     );
   }
 }
-

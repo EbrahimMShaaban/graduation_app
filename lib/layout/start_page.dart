@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:login_app1/layout/sign_up_page.dart';
 
 import '../shared/components/components.dart';
+import 'browsing_teams/browse_view.dart';
 import 'sign_in_page.dart';
 
 class StartPage extends StatelessWidget {
   StartPage({Key? key}) : super(key: key);
   double spaceBetweenButtons = 20;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +38,10 @@ class StartPage extends StatelessWidget {
                   text1: "Browse",
                   text2: " as a ",
                   text3: "Team Member",
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => BrowseView()));
+                  },
                 ),
                 SizedBox(
                   height: spaceBetweenButtons,
