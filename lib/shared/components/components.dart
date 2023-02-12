@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_app1/models/allteams_model.dart';
 import 'package:login_app1/shared/components/constants.dart';
 import 'package:login_app1/shared/styles/styles.dart';
 
@@ -192,6 +193,7 @@ class TeamsName extends StatelessWidget {
   TeamsName({Key? key, required this.name, required this.onPressed})
       : super(key: key);
   String name;
+
   void Function()? onPressed;
 
   @override
@@ -201,10 +203,9 @@ class TeamsName extends StatelessWidget {
       child: Container(
       //  color: Colors.red,
 
-        height: 70,
+        height: 100,
         width: 1,
         child: MaterialButton(
-
             padding: EdgeInsets.zero,
             color: Colors.grey[100],
             shape: RoundedRectangleBorder(
@@ -213,11 +214,11 @@ class TeamsName extends StatelessWidget {
 
             child:  RichText(
               text: TextSpan(
-                text: name,
+                text: 'Team ',
                 style: AppTextStyles.w300.apply(color: Colors.black,),
 
-                children: const <TextSpan>[
-                  TextSpan(text: ' bold', style: AppTextStyles.lrTitles),
+                children:  <TextSpan>[
+                  TextSpan(text:  name, style: AppTextStyles.lrTitles),
 
                 ],
               ),

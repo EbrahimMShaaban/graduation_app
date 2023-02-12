@@ -4,5 +4,7 @@ const LOGIN = 'login';
 const LOGOUT = 'logout';
 const teams = 'teams';
 const myTeams = 'teams/1';
-const allTeams = 'teams?type=/';
-//const allTeams = 'teams?type=credit';
+//const allTeams = 'teams?type=/';
+const allcreditTeams = 'teams?type=credit';
+const allgeneralTeams = 'teams?type=general';
+

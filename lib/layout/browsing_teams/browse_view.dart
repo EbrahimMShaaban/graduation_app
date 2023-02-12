@@ -45,12 +45,15 @@ class BrowseView extends StatelessWidget {
                   name: "General",
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => TeamView()));
+                        MaterialPageRoute(builder: (context) => TeamView(type: true,)));
                   },
                 ),
                 NavigateToOption(
                   name: "Credit",
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => TeamView(type: false,)));
+                  },
                 ),
               ],
             ),

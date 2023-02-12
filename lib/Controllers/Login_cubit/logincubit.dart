@@ -10,6 +10,7 @@ class LoginCubit extends Cubit<LoginStates> {
 
   static LoginCubit get(context) => BlocProvider.of(context);
   String message = "";
+
   Future postLogInDetails(
       {required context, required email, required password}) async {
     Map<String, dynamic> postdata = {"email": email, "password": password};
@@ -32,10 +33,10 @@ class LoginCubit extends Cubit<LoginStates> {
       }
       print(response);
     } catch (e) {
-      DioError error = e as DioError;
-      print(error.response);
-
-      message = error.response!.data["message"];
+      //DioError error = e as DioError;
+      // print(error.response);
+      print(e);
+    //  message = error.response!.data["message"];
       emit(LoginResultState());
     }
     return message;

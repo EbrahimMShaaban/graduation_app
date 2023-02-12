@@ -18,12 +18,13 @@ class SignUpCubit extends Cubit<SignUpState> {
       required name,
       required email,
       required password,
-      required confirmPassword}) async {
+    //  required confirmPassword
+      }) async {
     Map<String, dynamic> postdata = {
       "name": name,
       "email": email,
       "password": password,
-      "password_confirmation": confirmPassword
+    //  "password_confirmation": confirmPassword
     };
 
     emit(SignUpLoadingState());
