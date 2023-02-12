@@ -2,13 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_app1/layout/home/cubit/team_cubit.dart';
-import 'package:login_app1/layout/home/view/add_a_team/view.dart';
-import 'package:login_app1/layout/leader_welcome_page.dart';
-import 'package:login_app1/models/CreateTeam.dart';
+import 'package:login_app1/layout/home/view/don,t_have_team/view.dart';
 import 'package:login_app1/shared/components/constants.dart';
-
-import 'layout/home/view/yourTeam/view.dart';
-import 'layout/start_page.dart';
 import 'shared/network/remote/dio_helper.dart';
 
 void main() async {
@@ -32,10 +27,15 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
+
+
+
+
           create: (BuildContext context) => TeamCubit()
             ..createTeam
            // ..getMyTeam()
            // ..getAllTeams(),
+
         )
       ],
       child: MaterialApp(
@@ -45,7 +45,10 @@ class MyApp extends StatelessWidget {
             primaryColor: primarycolor,
             primarySwatch: materialColor,
           ),
-          home: StartPage()),
+
+          home: DontHaveTeame()),
+
+
     );
   }
 }

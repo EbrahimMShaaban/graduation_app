@@ -11,8 +11,7 @@ class DioHelper {
         BaseOptions(
             receiveDataWhenStatusError: true,
             baseUrl: BASEURL,
-         // headers: {"Accept": "application/json"}
-          ),
+            headers: {"Accept": "application/json"}),
       );
     } catch (e) {
       print(e.toString());
@@ -34,18 +33,24 @@ class DioHelper {
         data: posteddata, options: Options(headers: headers));
   }
 
-  static Future<Response> patchdata(
+  static Future<Response> putdata(
       {required String url,
       Map<String, dynamic>? query,
       required Map<String, dynamic> posteddata,
       headers}) async {
-    return await dio.patch(url,
+    return await dio.put(url,
         queryParameters: query,
         data: posteddata,
         options: Options(headers: headers));
   }
 
-  static Future<Response> deletedata({required String url}) async {
-    return await dio.delete(url);
+  static Future<Response> deletedata({
+    required String url,
+    headers
+  }) async {
+    return await dio.delete(
+      url,
+      options: Options(headers: headers),
+    );
   }
 }

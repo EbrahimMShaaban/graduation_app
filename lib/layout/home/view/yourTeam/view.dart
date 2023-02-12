@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_app1/layout/home/view/editTeam/view.dart';
+import 'package:login_app1/models/CreateTeam.dart';
 import 'package:login_app1/models/model_myteam.dart';
 import 'package:login_app1/shared/components/navigator.dart';
 
@@ -17,7 +18,40 @@ class YourTeamScreen extends StatefulWidget {
 }
 
 class _YourTeamScreenState extends State<YourTeamScreen> {
-  Widget screenView(MyTeam? data) {
+  @override
+  bool _isShown = true;
+
+  void _delete(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return AlertDialog(
+            title: const Text('Remove your team Are you sure?'),
+            // content: const Text('Are you sure to remove the box?'),
+            actions: [
+              // The "Yes" button
+              TextButton(
+                  onPressed: () {
+                    // Remove the box
+                    setState(() {
+                      _isShown = false;
+                    });
+
+                    // Close the dialog
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Yes',style: TextStyle(color: Colors.red),)),
+              TextButton(
+                  onPressed: () {
+                    // Close the dialog
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('No'))
+            ],
+          );
+        });
+  }
+  Widget screenView(CreateTeamModel? data) {
     return SafeArea(
         child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
@@ -38,11 +72,11 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
 
           // name leader //////////////////////////////////////////////////
           Text(
-            " ${data?.team?.attributes?.title}",
+            data!.team.attributes.title,
             style: labelStyle,
           ),
           Text(
-            " ${data?.team?.attributes?.type}",
+            data.team.attributes.type,
             style: labelStyle,
           ),
 
@@ -53,7 +87,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
 
           // Team member
           Text(
-            " ${data?.team?.attributes?.body}",
+            data.team.attributes.body,
             style: labelStyle,
           ),
 
@@ -95,7 +129,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
               color: AppColors.blue),
           TextInkWell(
             text: "Remove",
-            onTap: () {},
+            onTap: _isShown == true ? () => _delete(context) : null,
             color: AppColors.red,
             container: false,
           ),
@@ -106,16 +140,18 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
 
   @override
   Widget build(BuildContext context) {
+    late MyTeam? data = TeamCubit.get(context).myTeam;
+    // print(data!.team.id);
     return BlocConsumer<TeamCubit, TeamStates>(
       listener: (context, state) {
         print(state);
         // TODO: implement listener
       },
       builder: (context, state) {
-        var data = TeamCubit.get(context).myTeam;
+
         return Scaffold(
-          body: data != null
-              ? screenView(data)
+          body: TeamCubit.get(context).createTeamModel !=null
+              ? screenView(TeamCubit.get(context).createTeamModel)
               : Center(child: CircularProgressIndicator()),
         );
       },

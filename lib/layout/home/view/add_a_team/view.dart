@@ -173,27 +173,9 @@ class _AddTeamState extends State<AddTeam> {
         if (state is CreateTeamSuccessState) {
 
 
-          // Fluttertoast.showToast(
-          //     msg: "وصلت يا رااايق",
-          //     toastLength: Toast.LENGTH_SHORT,
-          //     gravity: ToastGravity.CENTER,
-          //     timeInSecForIosWeb: 5,
-          //     backgroundColor: Colors.green,
-          //     textColor: Colors.white,
-          //     fontSize: 16.0);
+
           navigateAndFinished(context, YourTeamScreen());
         } else {
-    // Fluttertoast.showToast(
-    //           msg: "عااااااااااااااااااااااااااااااااااا",
-    //           toastLength: Toast.LENGTH_SHORT,
-    //           gravity: ToastGravity.CENTER,
-    //           timeInSecForIosWeb: 5,
-    //           backgroundColor: Colors.red,
-    //           textColor: Colors.white,
-    //           fontSize: 16.0);
-
-
-          navigateAndFinished(context, YourTeamScreen());
         }
       },
       builder: (context, state) {

@@ -45,3 +45,14 @@ class AllTeamsErrorState extends TeamStates{
   AllTeamsErrorState({required this.message});
 
 }
+
+class DeletLoadingtState extends TeamStates{}
+class DeletSuccessState extends TeamStates{
+
+  // late final DeletModel loginModel;
+  // DeletSuccessState(this.loginModel);
+}
+class DeletErrorState extends TeamStates{
+
+
+}

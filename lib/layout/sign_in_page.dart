@@ -80,7 +80,7 @@ class SignInPage extends StatelessWidget {
                                       password: password.text)
                                   .then((value) {
                             //    if (value == "done") {
-                                navigateAndFinished(context,    LeaderWelcomePage());
+                                navigateAndFinished(context,LeaderWelcomePage());
                             //       Navigator.push(
                             //           context,
                             //           MaterialPageRoute(
