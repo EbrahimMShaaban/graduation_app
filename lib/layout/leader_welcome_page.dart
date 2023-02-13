@@ -44,6 +44,7 @@ class LeaderWelcomePage extends StatelessWidget {
                   onPressed: () {
                     navigateTo(context, AddTeam());
                   },
+
                 ),
                 NavigateToOption(
                   name: "Browse Teams",

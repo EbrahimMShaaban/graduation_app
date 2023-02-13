@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_app1/layout/home/cubit/team_cubit.dart';
 import 'package:login_app1/layout/home/view/don,t_have_team/view.dart';
+import 'package:login_app1/layout/start_page.dart';
 import 'package:login_app1/shared/components/constants.dart';
 import 'shared/network/remote/dio_helper.dart';
 
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: materialColor,
           ),
 
-          home: DontHaveTeame()),
+            home: StartPage()),
 
 
     );
