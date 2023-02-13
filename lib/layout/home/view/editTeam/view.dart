@@ -171,6 +171,7 @@ class _EditTeamState extends State<EditTeam> {
       listener: (context, state) {
 
         print(state);
+        print("عاااااااااااااااااااااااااااا");
         if (state is UpdataTeamSuccessState) {
 
           navigateAndFinished(context, YourTeamScreen());
@@ -181,9 +182,9 @@ class _EditTeamState extends State<EditTeam> {
       },
       builder: (context, state) {
         TeamCubit? teamCubit = TeamCubit.get(context);
-        teamMembers.text=teamCubit.createTeamModel!.team.attributes.title;
-        teamNeeds.text=teamCubit.createTeamModel!.team.attributes.body;
-        teamType=teamCubit.createTeamModel!.team.attributes.type;
+        teamMembers.text=teamCubit.myTeam!.team.attributes.title;
+        teamNeeds.text=teamCubit.myTeam!.team.attributes.body;
+        teamType=teamCubit.myTeam!.team.attributes.type;
         return Scaffold(
             backgroundColor: AppColors.white,
             body: SingleChildScrollView(
@@ -224,7 +225,7 @@ class _EditTeamState extends State<EditTeam> {
                               container: false,
                             ),
 
-                            state is CreateTeamLoadingtState
+                            state is UpdataTeamLoadingtState
                                 ? Center(
                               child: CircularProgressIndicator(
                                   color: primarycolor),

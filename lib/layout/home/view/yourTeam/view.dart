@@ -142,7 +142,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
 
   @override
   Widget build(BuildContext context) {
-    TeamCubit.get(context).getMyTeam();
+    // TeamCubit.get(context).getMyTeam();
     return BlocConsumer<TeamCubit, TeamStates>(
       listener: (context, state) {
         print(state);
