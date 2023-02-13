@@ -28,8 +28,8 @@ class TeamView extends StatelessWidget {
                         children: [
                           Padding(
                             padding: EdgeInsets.only(top: 20, bottom: 20),
-                            child: Text(
-                              "General",
+                            child: Text(type?
+                              "General":'Credit',
                               style: AppTextStyles.boldtitles,
                             ),
                           ),

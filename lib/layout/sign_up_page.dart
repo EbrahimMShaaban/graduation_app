@@ -9,19 +9,31 @@ import 'leader_welcome_page.dart';
 
 class SignUpPage extends StatelessWidget {
   SignUpPage({Key? key}) : super(key: key);
+
   double spaceBetweenButtons = 20;
   var name = TextEditingController();
   var email = TextEditingController();
   var password = TextEditingController();
   var confirmPassword = TextEditingController();
-  GlobalKey formkey = GlobalKey();
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  // Future<void> _register(BuildContext context) async {
+  //   if (!formkey.currentState!.validate()) {
+  //     Navigator.pop(context);
+  //     return;
+  //   } else {
+  //     Navigator.pop(context);
+  //     formkey.currentState!.save();
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SignUpCubit(),
       child: Form(
-        key: formkey,
+        key: formKey,
         child: Scaffold(
           body: Column(
             mainAxisSize: MainAxisSize.max,
@@ -55,14 +67,32 @@ class SignUpPage extends StatelessWidget {
                     TextFieldTemplate(
                       hintText: "Name",
                       controller: name,
+                      validator: (String? value) {
+                        if (value!.isEmpty) {
+                          return 'The First name Field is not allowed to be empty ';
+                        }
+                        return null;
+                      },
                     ),
                     TextFieldTemplate(
                       hintText: "Email",
                       controller: email,
+                      validator: (String? value) {
+                        if (value!.isEmpty) {
+                          return 'The First name Field is not allowed to be empty ';
+                        }
+                        return null;
+                      },
                     ),
                     TextFieldTemplate(
                       hintText: "Password",
                       controller: password,
+                      validator: (String? value) {
+                        if (value!.isEmpty) {
+                          return 'The First name Field is not allowed to be empty ';
+                        }
+                        return null;
+                      },
                       obscureText: true,
                     ),
                     // TextFieldTemplate(
@@ -95,26 +125,31 @@ class SignUpPage extends StatelessWidget {
                             minwidth: 190,
                             text1: "Sign Up",
                             onPressed: () async {
+                              if (formKey.currentState!.validate()){
+
+                              }
+
                               signUpCubit
                                   .postSignUpDetails(
-                                      context: context,
-                                      name: name.text,
-                                      email: email.text,
-                                      password: password.text,
-                                    //  confirmPassword: confirmPassword.text
+                                context: context,
+                                name: name.text,
+                                email: email.text,
+                                password: password.text,
+                                //  confirmPassword: confirmPassword.text
                               )
                                   .then((value) {
-                               // if (value == "done") {
-                                navigateAndFinished(context, LeaderWelcomePage());
-                               //    Navigator.push(
-                               //        context,
-                               //        MaterialPageRoute(
-                               //            builder: (context) =>
-                               //                LeaderWelcomePage()));
-                             //   }
-                             //    else if (value != "done") {
-                             //      showMyDialog(signUpCubit.message, context);
-                             //    }
+                                // if (value == "done") {
+                                navigateAndFinished(
+                                    context, LeaderWelcomePage());
+                                //    Navigator.push(
+                                //        context,
+                                //        MaterialPageRoute(
+                                //            builder: (context) =>
+                                //                LeaderWelcomePage()));
+                                //   }
+                                //    else if (value != "done") {
+                                //      showMyDialog(signUpCubit.message, context);
+                                //    }
                                 //todo:make catch error
                               });
                             },

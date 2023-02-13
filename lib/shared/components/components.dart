@@ -50,12 +50,15 @@ class TextFieldTemplate extends StatelessWidget {
       {Key? key,
       required this.hintText,
       required this.controller,
-      this.obscureText = false})
+      this.obscureText = false,
+        this.validator,
+      })
       : super(key: key);
 
   String hintText;
   TextEditingController controller;
   bool obscureText;
+  Function? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +72,7 @@ class TextFieldTemplate extends StatelessWidget {
           child: TextFormField(
             obscureText: obscureText,
             controller: controller,
+            validator: (value) => validator!(value),
             decoration:
                 InputDecoration(hintText: hintText, border: InputBorder.none),
           ),
