@@ -25,8 +25,9 @@ class LoginCubit extends Cubit<LoginStates> {
       print(response.data);
       if (response.data['token'] != null) {
         User.id = response.data["user"]["id"].toString();
-        User.name = response.data["user"]["name"];
-        User.email = response.data["user"]["email"];
+        User.team_id = response.data["user"]["team_id"].toString();
+        User.name = response.data["user"]["attributes"]["name"];
+        User.email = response.data["user"]["attributes"]["email"];
         User.token = response.data["token"];
         message = "done";
         emit(LoginSuccessState());

@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
 
 
           create: (BuildContext context) => TeamCubit()
-            ..createTeam
            // ..getMyTeam()
            // ..getAllTeams(),
 
@@ -48,6 +47,7 @@ class MyApp extends StatelessWidget {
           ),
 
             home: StartPage()),
+
 
 
     );

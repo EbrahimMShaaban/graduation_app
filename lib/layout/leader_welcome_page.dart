@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_app1/Controllers/Login_cubit/logincubit.dart';
 import 'package:login_app1/layout/home/view/add_a_team/view.dart';
+import 'package:login_app1/layout/home/view/don,t_have_team/view.dart';
 import 'package:login_app1/layout/home/view/yourTeam/view.dart';
 import 'package:login_app1/models/User.dart';
 import 'package:login_app1/models/model_myteam.dart';
@@ -14,7 +15,7 @@ class LeaderWelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: User.name!=null? Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +43,13 @@ class LeaderWelcomePage extends StatelessWidget {
                 NavigateToOption(
                   name: "Your Team",
                   onPressed: () {
-                    navigateTo(context, AddTeam());
+                    print(User.token);
+                    print(User.team_id);
+                    if (User.team_id == "null") {
+                      return navigateTo(context, DontHaveTeame());
+                    } else {
+                      return navigateTo(context, YourTeamScreen());
+                    }
                   },
 
                 ),
@@ -56,8 +63,7 @@ class LeaderWelcomePage extends StatelessWidget {
             ),
           ],
         ),
-      ),
+      ): Center(child: CircularProgressIndicator()),
     );
   }
 }
-

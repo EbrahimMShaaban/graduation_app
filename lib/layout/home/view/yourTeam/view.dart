@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_app1/layout/home/view/editTeam/view.dart';
+import 'package:login_app1/layout/leader_welcome_page.dart';
 import 'package:login_app1/models/CreateTeam.dart';
 import 'package:login_app1/models/model_myteam.dart';
 import 'package:login_app1/shared/components/navigator.dart';
@@ -51,7 +52,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
           );
         });
   }
-  Widget screenView(CreateTeamModel? data) {
+  Widget screenView(MyTeam? data) {
     return SafeArea(
         child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
@@ -115,7 +116,8 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
           TextInkWell(
             text: "Return",
             onTap: () {
-              Navigator.pop(context);
+
+              navigateTo(context, LeaderWelcomePage());
             },
             color: AppColors.greyDark,
             container: false,
@@ -140,8 +142,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
 
   @override
   Widget build(BuildContext context) {
-    late MyTeam? data = TeamCubit.get(context).myTeam;
-    // print(data!.team.id);
+    TeamCubit.get(context).getMyTeam();
     return BlocConsumer<TeamCubit, TeamStates>(
       listener: (context, state) {
         print(state);
@@ -150,8 +151,9 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
       builder: (context, state) {
 
         return Scaffold(
-          body: TeamCubit.get(context).createTeamModel !=null
-              ? screenView(TeamCubit.get(context).createTeamModel)
+          body: state is MyTeamSuccessState
+          // TeamCubit.get(context).createTeamModel !=null
+              ? screenView(TeamCubit.get(context).myTeam)
               : Center(child: CircularProgressIndicator()),
         );
       },
