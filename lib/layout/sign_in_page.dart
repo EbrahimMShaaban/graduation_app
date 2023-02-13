@@ -6,7 +6,9 @@ import 'package:login_app1/shared/components/navigator.dart';
 
 import '../Controllers/Login_cubit/logincubit.dart';
 import '../Controllers/Login_cubit/loginstates.dart';
+import '../models/User.dart';
 import '../shared/components/components.dart';
+import '../shared/network/local/shared_preferences.dart';
 import 'leader_welcome_page.dart';
 
 class SignInPage extends StatelessWidget {
@@ -22,6 +24,7 @@ class SignInPage extends StatelessWidget {
       create: (context) => LoginCubit(),
       child: Form(
         child: Scaffold(
+          appBar: AppBar(),
           body: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -80,7 +83,16 @@ class SignInPage extends StatelessWidget {
                                       password: password.text)
                                   .then((value) {
                             //    if (value == "done") {
+
                                 navigateAndFinished(context,LeaderWelcomePage());
+                                CacheHelper.saveData(
+                                    key: 'token', value: User.token);
+                              CacheHelper.saveData(
+                                    key: 'name', value: User.name);
+                              CacheHelper.saveData(
+                                    key: 'team_id', value: User.team_id);
+
+
                             //       Navigator.push(
                             //           context,
                             //           MaterialPageRoute(
