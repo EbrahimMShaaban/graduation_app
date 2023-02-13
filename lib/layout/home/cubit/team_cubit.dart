@@ -31,7 +31,7 @@ class TeamCubit extends Cubit<TeamStates> {
   void getMyTeam() {
     emit(MyTeamLoadingtState());
     DioHelper.getdata(
-      url: myTeams+User.team_id,
+      url: myTeams+team_id,
       headers: {
         'Content-type': 'application/json',
         'Accept': 'application/json',
@@ -55,11 +55,11 @@ class TeamCubit extends Cubit<TeamStates> {
     print(myTeams+myTeam!.team.id);
     emit(DeletLoadingtState());
     DioHelper.deletedata(
-      url: myTeams+User.team_id,
+      url: myTeams+team_id,
       headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-    'Authorization': "Bearer ${User.token}",
+    'Authorization': "Bearer ${token}",
     },
     ).then((value) {
 
@@ -116,16 +116,16 @@ class TeamCubit extends Cubit<TeamStates> {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': "Bearer ${User.token}",
+        'Authorization': "Bearer ${token}",
       },
     ).then((value) {
       createTeamModel= CreateTeamModel.fromJson(value.data);
       print(createTeamModel?.team.id);
       print(createTeamModel?.team.id);
-      User.team_id=value.data["team"]["id"].toString();
+      team_id=value.data["team"]["id"].toString();
       emit(CreateTeamSuccessState());
     }).catchError((error) {
-      print(User.token);
+      print(token);
       print(error.toString());
 
       emit(CreateTeamErrorState(message: error));
@@ -143,7 +143,7 @@ class TeamCubit extends Cubit<TeamStates> {
     print(Type);
     emit(UpdataTeamLoadingtState());
     await DioHelper.postdata(
-      url: myTeams+User.team_id,
+      url: myTeams+team_id,
       posteddata: {
         "title": teamMembers,
         "body": teamNeeds,
@@ -152,14 +152,14 @@ class TeamCubit extends Cubit<TeamStates> {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': "Bearer ${User.token}",
+        'Authorization': "Bearer ${token}",
       },
     ).then((value) {
 
       emit(UpdataTeamSuccessState());
       myTeam= MyTeam.fromJson(value.data);
     }).catchError((error) {
-      print(User.token);
+      print(token);
       print(error.toString());
 
       emit(UpdataTeamErrorState());

@@ -8,3 +8,7 @@ const myTeams = 'teams/';
 //const allTeams = 'teams?type=/';
 const allcreditTeams = 'teams?type=credit';
 const allgeneralTeams = 'teams?type=general';
+dynamic token = '';
+dynamic name = '';
+dynamic team_id = '';
+dynamic user = '';
