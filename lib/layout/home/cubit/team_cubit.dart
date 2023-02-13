@@ -27,7 +27,7 @@ class TeamCubit extends Cubit<TeamStates> {
 
   MyTeam? myTeam;
   AllTeams? allTeamsmodel;
-
+  CreateTeamModel? createTeamModel;
   void getMyTeam() {
     emit(MyTeamLoadingtState());
     DioHelper.getdata(
@@ -97,7 +97,6 @@ class TeamCubit extends Cubit<TeamStates> {
   }
 
 
-  CreateTeamModel? createTeamModel;
   void createTeam({
     required String teamMembers,
     required String Type,
@@ -156,9 +155,9 @@ class TeamCubit extends Cubit<TeamStates> {
         'Authorization': "Bearer ${User.token}",
       },
     ).then((value) {
-      createTeamModel= CreateTeamModel.fromJson(value.data);
-      emit(UpdataTeamSuccessState());
 
+      emit(UpdataTeamSuccessState());
+      myTeam= MyTeam.fromJson(value.data);
     }).catchError((error) {
       print(User.token);
       print(error.toString());
