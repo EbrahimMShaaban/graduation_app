@@ -171,7 +171,7 @@ class _EditTeamState extends State<EditTeam> {
       listener: (context, state) {
 
         print(state);
-        if (state is CreateTeamSuccessState) {
+        if (state is UpdataTeamSuccessState) {
 
           navigateAndFinished(context, YourTeamScreen());
         } else {
@@ -236,10 +236,6 @@ class _EditTeamState extends State<EditTeam> {
                                     teamMembers: teamMembers.text,
                                     teamNeeds: teamNeeds.text,
                                     Type: teamType);
-                                if (state is CreateTeamSuccessState) {
-                                  navigateAndFinished(
-                                      context, YourTeamScreen());
-                                }
                               },
                               color: AppColors.blue,
                               container: true,
