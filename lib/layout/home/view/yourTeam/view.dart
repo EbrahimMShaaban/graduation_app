@@ -94,12 +94,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
 
           //Team Needs
 
-          Expanded(
-            child: Align(
-              alignment: FractionalOffset.bottomCenter,
-              child: Button(),
-            ),
-          ),
+
           //Button
         ],
       ),

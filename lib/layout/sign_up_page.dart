@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_app1/Controllers/SignUp_cubit/sign_up_cubit.dart';
+import 'package:login_app1/models/User.dart';
 import 'package:login_app1/shared/components/constants.dart';
 import 'package:login_app1/shared/components/navigator.dart';
 
 import '../shared/components/components.dart';
+import '../shared/network/local/shared_preferences.dart';
 import 'leader_welcome_page.dart';
 
 class SignUpPage extends StatelessWidget {
@@ -35,6 +37,7 @@ class SignUpPage extends StatelessWidget {
       child: Form(
         key: formKey,
         child: Scaffold(
+          appBar: AppBar(),
           body: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -125,9 +128,7 @@ class SignUpPage extends StatelessWidget {
                             minwidth: 190,
                             text1: "Sign Up",
                             onPressed: () async {
-                              if (formKey.currentState!.validate()){
-
-                              }
+                              if (formKey.currentState!.validate()) {}
 
                               signUpCubit
                                   .postSignUpDetails(
@@ -139,8 +140,29 @@ class SignUpPage extends StatelessWidget {
                               )
                                   .then((value) {
                                 // if (value == "done") {
-                                navigateAndFinished(
-                                    context, LeaderWelcomePage());
+                                // navigateAndFinished(
+                                //     context, LeaderWelcomePage());
+                                //    Navigator.push(
+                                //        context,
+                                //        MaterialPageRoute(
+                                //            builder: (context) =>
+                                //                LeaderWelcomePage()));
+                                //   }
+                                //    else if (value != "done") {
+                                //      showMyDialog(signUpCubit.message, context);
+                                //    }
+                                // if (value == "done") {
+                                if (state is SignUpSuccessState) {
+                                  navigateAndFinished(
+                                      context, LeaderWelcomePage());
+
+                                  CacheHelper.saveData(
+                                      key: 'token', value: User.token);
+                                  CacheHelper.saveData(
+                                      key: 'name', value: User.name);
+                                  CacheHelper.saveData(
+                                      key: 'team_id', value: User.team_id);
+                                }
                                 //    Navigator.push(
                                 //        context,
                                 //        MaterialPageRoute(
