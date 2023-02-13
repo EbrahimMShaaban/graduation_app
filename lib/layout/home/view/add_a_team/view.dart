@@ -171,9 +171,8 @@ class _AddTeamState extends State<AddTeam> {
       listener: (context, state) {
         print(state);
         if (state is CreateTeamSuccessState) {
-
-
-
+          print(state);
+          print("state");
           navigateAndFinished(context, YourTeamScreen());
         } else {
         }
@@ -233,10 +232,10 @@ class _AddTeamState extends State<AddTeam> {
                                           teamMembers: teamMembers.text,
                                           teamNeeds: teamNeeds.text,
                                           Type: teamType);
-                                      if (state is CreateTeamSuccessState) {
-                                        navigateAndFinished(
-                                            context, YourTeamScreen());
-                                      }
+                                      // if (state is CreateTeamSuccessState) {
+                                      //   navigateAndFinished(
+                                      //       context, YourTeamScreen());
+                                      // }
                                     },
                                     color: AppColors.blue,
                                     container: true,

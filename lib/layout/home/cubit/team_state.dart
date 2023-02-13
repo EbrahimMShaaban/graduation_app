@@ -19,6 +19,19 @@ class CreateTeamErrorState extends TeamStates{
 
 }
 
+class UpdataTeamLoadingtState extends TeamStates{}
+class UpdataTeamSuccessState extends TeamStates{
+
+  // late final UpdataTeamModel loginModel;
+  // UpdataTeamSuccessState(this.loginModel);
+}
+class UpdataTeamErrorState extends TeamStates{
+
+
+  UpdataTeamErrorState();
+
+}
+
 class MyTeamLoadingtState extends TeamStates{}
 class MyTeamSuccessState extends TeamStates{
 
@@ -26,9 +39,9 @@ class MyTeamSuccessState extends TeamStates{
   // MyTeamSuccessState(this.loginModel);
 }
 class MyTeamErrorState extends TeamStates{
-  final String? message;
+  // final String? message;
 
-  MyTeamErrorState({required this.message});
+  // MyTeamErrorState({required this.message});
 
 }class AllTeamsLoadingtState extends TeamStates{
 
