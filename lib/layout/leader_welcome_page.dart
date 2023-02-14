@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_app1/Controllers/Login_cubit/logincubit.dart';
+import 'package:login_app1/layout/browsing_teams/browse_view.dart';
 import 'package:login_app1/layout/home/view/add_a_team/view.dart';
 import 'package:login_app1/layout/home/view/don,t_have_team/view.dart';
 import 'package:login_app1/layout/home/view/yourTeam/view.dart';
@@ -63,6 +64,7 @@ class _LeaderWelcomePageState extends State<LeaderWelcomePage> {
     print(token);
     print(team_id);
     return Scaffold(
+
       appBar: AppBar(
         actions: [
           IconButton(

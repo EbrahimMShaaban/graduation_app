@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,21 +6,23 @@ import 'package:login_app1/layout/home/cubit/team_cubit.dart';
 import 'package:login_app1/layout/start_page.dart';
 import 'package:login_app1/shared/components/constants.dart';
 import 'package:login_app1/shared/network/local/shared_preferences.dart';
+import 'package:login_app1/shared/network/remote/end_points.dart';
 import 'package:login_app1/shared/styles/colors.dart';
 import 'layout/leader_welcome_page.dart';
 import 'models/User.dart';
 import 'shared/network/remote/dio_helper.dart';
-import 'shared/network/remote/end_points.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await DioHelper.init();
   await DioHelper.init();
   await CacheHelper.init();
   final Widget startWidget;
   token = CacheHelper.getData(key: 'token');
   myName = CacheHelper.getData(key: 'name');
   team_id = CacheHelper.getData(key: 'team_id');
-  if (token != null) {
+
+    if (token != null) {
     startWidget = LeaderWelcomePage();
     print(team_id);
     print(token);
@@ -36,7 +39,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final Widget startWidget;
+    final Widget startWidget;
 
   const MyApp({
     required this.startWidget,
@@ -55,7 +58,8 @@ class MyApp extends StatelessWidget {
     ));
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (BuildContext context) => TeamCubit()..getMyTeam()
+        BlocProvider(create: (BuildContext context) => TeamCubit()
+          //..getMyTeam()
             // ..getMyTeam()
             // ..getAllTeams(),
 
@@ -70,9 +74,7 @@ class MyApp extends StatelessWidget {
               appBarTheme: AppBarTheme(
                   color: AppColors.white,
                   elevation: 0,
-                  iconTheme: IconThemeData(
-                    color: primarycolor
-                  ))),
+                  iconTheme: IconThemeData(color: primarycolor))),
           home: startWidget),
     );
   }
