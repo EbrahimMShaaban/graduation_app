@@ -232,7 +232,7 @@ class _EditTeamState extends State<EditTeam> {
                             )
                                 : TextInkWell(
                               text: "Submit",
-                              onTap: () async {
+                              onTap: () {
                                 teamCubit.EditTeam(
                                     teamMembers: teamMembers.text,
                                     teamNeeds: teamNeeds.text,

@@ -38,8 +38,10 @@ class SignUpCubit extends Cubit<SignUpState> {
         User.id = response.data["user"]["id"].toString();
         User.team_id = response.data["user"]["team_id"].toString();
         team_id = response.data["user"]["team_id"].toString();
+        myName = response.data["user"]["attributes"]["name"];
+        token = response.data["token"];
         User.name = response.data["user"]["attributes"]["name"];
-        name = response.data["user"]["attributes"]["name"];
+
 
         User.email = response.data["user"]["attributes"]["email"];
         User.token = response.data["token"];

@@ -9,6 +9,6 @@ const myTeams = 'teams/';
 const allcreditTeams = 'teams?type=credit';
 const allgeneralTeams = 'teams?type=general';
 dynamic token = '';
-dynamic name = '';
+dynamic myName = '';
 dynamic team_id = '';
 dynamic user = '';

@@ -83,14 +83,14 @@ class SignInPage extends StatelessWidget {
                                       password: password.text)
                                   .then((value) {
                             //    if (value == "done") {
-
-                                navigateAndFinished(context,LeaderWelcomePage());
                                 CacheHelper.saveData(
                                     key: 'token', value: User.token);
-                              CacheHelper.saveData(
+                                CacheHelper.saveData(
                                     key: 'name', value: User.name);
-                              CacheHelper.saveData(
+                                CacheHelper.saveData(
                                     key: 'team_id', value: User.team_id);
+
+                                navigateAndFinished(context,LeaderWelcomePage());
 
 
                             //       Navigator.push(
