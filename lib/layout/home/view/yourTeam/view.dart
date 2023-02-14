@@ -40,6 +40,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
 
                           setState(() {
                             _isShown = false;
+                            TeamCubit.get(context).DeletMyTeam(context);
                           });
 
 
@@ -83,10 +84,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
             data!.team.attributes.title,
             style: labelStyle,
           ),
-          Text(
-            data.team.attributes.type,
-            style: labelStyle,
-          ),
+ SizedBox(height: 25,),
 
           Text(
             'Team Description :',

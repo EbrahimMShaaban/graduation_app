@@ -150,7 +150,7 @@ class TeamCubit extends Cubit<TeamStates> {
 
   void EditTeam({
     required String teamMembers,
-    required String Type,
+    required String type,
     required String teamNeeds,
   }) async {
     print(teamMembers);
@@ -162,7 +162,7 @@ class TeamCubit extends Cubit<TeamStates> {
       posteddata: {
         "title": teamMembers,
         "body": teamNeeds,
-        "type": "credit",
+        "type": type,
       },
       headers: {
         'Content-Type': 'application/json',
