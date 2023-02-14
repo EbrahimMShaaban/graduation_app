@@ -46,6 +46,9 @@ class TeamCubit extends Cubit<TeamStates> {
       // print(myTeam!.team.id);
 
       emit(MyTeamSuccessState());
+
+      print(team_id);
+      print("team_id");
     }).catchError((error) {
       print(error);
      print("00000000000000000000000ddddddddddddddddddddddd000000");
@@ -67,9 +70,9 @@ class TeamCubit extends Cubit<TeamStates> {
     ).then((value) {
 
       emit(DeletSuccessState());
-      CacheHelper.removeToken(key: 'team_id').then((value) {
+
         navigateAndFinished(context, LeaderWelcomePage());
-      });
+      CacheHelper.removeToken(key: 'team_id');
 
     }).catchError((error) {
       print(error);
@@ -129,7 +132,10 @@ class TeamCubit extends Cubit<TeamStates> {
       createTeamModel= CreateTeamModel.fromJson(value.data);
       print(createTeamModel?.team.id);
       print(createTeamModel?.team.id);
-      team_id=value.data["team"]["id"].toString();
+      team_id=value.data["team"]["id"];
+      CacheHelper.saveData(
+          key: 'team_id', value: value.data["team"]["id"]);
+      print(team_id);
       print("ddddddddddddddddddddddddddddddddddddddddddddddddddddd");
       print(value.data["team"]["id"].toString());
       emit(CreateTeamSuccessState());
