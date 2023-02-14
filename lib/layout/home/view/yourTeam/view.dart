@@ -104,7 +104,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
           Expanded(
             child: Align(
               alignment: FractionalOffset.bottomCenter,
-              child: Button(state),
+              child: Button(state, data),
             ),
           ),
           //Button
@@ -113,7 +113,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
     ));
   }
 
-  Widget Button(state) {
+  Widget Button(state,MyTeam data) {
     return Container(
       height: MediaQuery.of(context).size.height / 5,
       child: Row(
@@ -132,7 +132,9 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
               text: "Edit",
               container: false,
               onTap: () {
-                navigateTo(context, EditTeam());
+                navigateAndReplace(context, EditTeam(
+                     data: data,
+                ));
               },
               color: AppColors.blue),
           TextInkWell(

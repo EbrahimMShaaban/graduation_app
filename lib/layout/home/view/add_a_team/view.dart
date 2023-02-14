@@ -5,7 +5,9 @@ import 'package:login_app1/shared/components/constants.dart';
 import 'package:login_app1/shared/styles/colors.dart';
 import 'package:login_app1/shared/styles/mu_styal.dart';
 
+import '../../../../models/User.dart';
 import '../../../../shared/components/navigator.dart';
+import '../../../../shared/network/local/shared_preferences.dart';
 import '../../widgets/Text_Button.dart';
 import '../yourTeam/view.dart';
 
@@ -20,9 +22,8 @@ class AddTeam extends StatefulWidget {
 
 class _AddTeamState extends State<AddTeam> {
   TextEditingController teamMembers = TextEditingController();
-  late String teamType ;
   TextEditingController teamNeeds = TextEditingController();
-  String? dropdownValue = list?.first;
+  String dropdownValue = "credit";
 
   Widget addMembers() {
     return Row(
@@ -96,7 +97,7 @@ class _AddTeamState extends State<AddTeam> {
                     setState(() {
                       dropdownValue = value!;
                       print(value);
-                      teamType=value;
+
                     });
                     // This is called when the user selects an item.
                   },
@@ -214,7 +215,7 @@ class _AddTeamState extends State<AddTeam> {
                             TextInkWell(
                               text: "Return",
                               onTap: () {
-                                navigateTo(context, YourTeamScreen());
+                                Navigator.pop(context);
                               },
                               color: AppColors.greyDark,
                               container: false,
@@ -231,11 +232,12 @@ class _AddTeamState extends State<AddTeam> {
                                       teamCubit.createTeam(
                                           teamMembers: teamMembers.text,
                                           teamNeeds: teamNeeds.text,
-                                          Type: teamType);
+                                          Type: dropdownValue);
                                       // if (state is CreateTeamSuccessState) {
                                       //   navigateAndFinished(
                                       //       context, YourTeamScreen());
-                                      // }
+
+                                    ;
                                     },
                                     color: AppColors.blue,
                                     container: true,
