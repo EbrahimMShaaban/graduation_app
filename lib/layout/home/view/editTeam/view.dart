@@ -20,12 +20,21 @@ class EditTeam extends StatefulWidget {
 }
 
 class _EditTeamState extends State<EditTeam> {
-  var teamMembers = TextEditingController();
+  TextEditingController teamMembers = TextEditingController();
 
-  var teamNeeds = TextEditingController();
+  TextEditingController teamNeeds = TextEditingController();
   final formKey = GlobalKey<FormState>();
   String dropdownValue = "credit";
 
+  @override
+  void initState() {
+    String _teamMembers = widget.data.team.attributes.title;
+   String _teamNeeds = widget.data.team.attributes.body;
+    teamMembers = TextEditingController(text: _teamMembers);
+    teamNeeds = TextEditingController(text: _teamNeeds);
+    dropdownValue = widget.data.team.attributes.type;
+    super.initState();
+  }
   Widget addMembers() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -177,9 +186,7 @@ class _EditTeamState extends State<EditTeam> {
   @override
   Widget build(BuildContext context) {
     // TeamCubit? teamCubit = TeamCubit.get(context);
-    teamMembers.text = widget.data.team.attributes.title;
-    teamNeeds.text = widget.data.team.attributes.body;
-    dropdownValue = widget.data.team.attributes.type;
+
     return BlocConsumer<TeamCubit, TeamStates>(
       listener: (context, state) {
         print(state);
@@ -205,7 +212,7 @@ class _EditTeamState extends State<EditTeam> {
                         if (state is UpdataTeamLoadingtState)
                           LinearProgressIndicator(),
                         Text(
-                          'Add a team',
+                          'Edit a team',
                           style: boldStyle,
                         ),
                         const SizedBox(
@@ -244,7 +251,7 @@ class _EditTeamState extends State<EditTeam> {
                                   TeamCubit.get(context).EditTeam(
                                       teamMembers: teamMembers.text,
                                       teamNeeds: teamNeeds.text,
-                                      Type: dropdownValue);
+                                      type: dropdownValue);
                                 },
                                 color: AppColors.blue,
                                 container: true,
