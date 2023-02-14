@@ -59,9 +59,11 @@ class _LeaderWelcomePageState extends State<LeaderWelcomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print(myName);
+    print(token);
+    print(team_id);
     return Scaffold(
       appBar: AppBar(
-
         actions: [
           IconButton(
               onPressed: _isShown == true ? () => _delete(context) : null,
@@ -71,7 +73,7 @@ class _LeaderWelcomePageState extends State<LeaderWelcomePage> {
               ))
         ],
       ),
-      body: User.name != null || name != null
+      body: User.name != null || myName != null
           ? Container(
               child: Center(
                 child: Column(
@@ -87,7 +89,7 @@ class _LeaderWelcomePageState extends State<LeaderWelcomePage> {
                             "Welcome,",
                             style: TextStyle(fontSize: 40),
                           ),
-                          Text(name,
+                          Text(myName,
                               style: TextStyle(
                                   fontSize: 35, fontWeight: FontWeight.bold)),
                         ],
@@ -101,9 +103,7 @@ class _LeaderWelcomePageState extends State<LeaderWelcomePage> {
                         NavigateToOption(
                           name: "Your Team",
                           onPressed: () {
-                            print(User.token);
-                            print(User.team_id);
-                            if (User.team_id == "null") {
+                            if (team_id == "null") {
                               return navigateTo(context, DontHaveTeame());
                             } else {
                               return navigateTo(context, YourTeamScreen());
@@ -129,6 +129,8 @@ class _LeaderWelcomePageState extends State<LeaderWelcomePage> {
 
 void signout(context) {
   CacheHelper.removeToken(key: 'token').then((value) {
+    CacheHelper.removeToken(key: 'name');
+    CacheHelper.removeToken(key: 'team_id');
     navigateAndFinished(context, StartPage());
   });
 }

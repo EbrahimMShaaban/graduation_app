@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:login_app1/layout/leader_welcome_page.dart';
 import 'package:login_app1/models/User.dart';
 import 'package:login_app1/models/allteams_model.dart';
+import 'package:login_app1/shared/components/navigator.dart';
 
 import 'package:meta/meta.dart';
 
@@ -9,6 +11,7 @@ import '../../../../../shared/network/remote/dio_helper.dart';
 import '../../../../../shared/network/remote/end_points.dart';
 import '../../../models/CreateTeam.dart';
 import '../../../models/model_myteam.dart';
+import '../../../shared/network/local/shared_preferences.dart';
 
 part 'team_state.dart';
 
@@ -50,7 +53,7 @@ class TeamCubit extends Cubit<TeamStates> {
     });
   }
 
-  void DeletMyTeam() {
+  void DeletMyTeam(context) {
 
     print(myTeams+myTeam!.team.id);
     emit(DeletLoadingtState());
@@ -64,6 +67,10 @@ class TeamCubit extends Cubit<TeamStates> {
     ).then((value) {
 
       emit(DeletSuccessState());
+      CacheHelper.removeToken(key: 'team_id').then((value) {
+        navigateAndFinished(context, LeaderWelcomePage());
+      });
+
     }).catchError((error) {
       print(error);
       emit(DeletErrorState());
@@ -123,6 +130,8 @@ class TeamCubit extends Cubit<TeamStates> {
       print(createTeamModel?.team.id);
       print(createTeamModel?.team.id);
       team_id=value.data["team"]["id"].toString();
+      print("ddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+      print(value.data["team"]["id"].toString());
       emit(CreateTeamSuccessState());
     }).catchError((error) {
       print(token);

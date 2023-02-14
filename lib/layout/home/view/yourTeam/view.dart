@@ -39,7 +39,10 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
                     });
 
                     // Close the dialog
-                    Navigator.of(context).pop();
+                    TeamCubit.get(context).DeletMyTeam(
+                      context
+                    );
+
                   },
                   child: const Text('Yes',style: TextStyle(color: Colors.red),)),
               TextButton(
@@ -94,7 +97,12 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
 
           //Team Needs
 
-
+          Expanded(
+            child: Align(
+              alignment: FractionalOffset.bottomCenter,
+              child: Button(),
+            ),
+          ),
           //Button
         ],
       ),
@@ -137,7 +145,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // TeamCubit.get(context).getMyTeam();
+    TeamCubit.get(context).getMyTeam();
     return BlocConsumer<TeamCubit, TeamStates>(
       listener: (context, state) {
         print(state);

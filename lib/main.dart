@@ -17,7 +17,7 @@ void main() async {
   await CacheHelper.init();
   final Widget startWidget;
   token = CacheHelper.getData(key: 'token');
-  name = CacheHelper.getData(key: 'name');
+  myName = CacheHelper.getData(key: 'name');
   team_id = CacheHelper.getData(key: 'team_id');
   if (token != null) {
     startWidget = LeaderWelcomePage();

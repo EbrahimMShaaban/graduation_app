@@ -107,7 +107,7 @@ class SignUpPage extends StatelessWidget {
                               )
                                   .then((value) {
                                // if (value == "done") {
-                                if(state is SignUpSuccessState) {
+
                                   navigateAndFinished(context,LeaderWelcomePage());
 
                                   CacheHelper.saveData(
@@ -117,7 +117,7 @@ class SignUpPage extends StatelessWidget {
                                   CacheHelper.saveData(
                                       key: 'team_id', value: User.team_id);
 
-                                }
+
                                 //    Navigator.push(
                                //        context,
                                //        MaterialPageRoute(
