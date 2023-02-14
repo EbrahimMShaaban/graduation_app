@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:login_app1/shared/components/constants.dart';
 
 import '../../../../shared/styles/mu_styal.dart';
 import '../../models/allteams_model.dart';
@@ -29,13 +30,17 @@ class TeamDiscription extends StatelessWidget {
             style: boldStyle,
           ),
           SizedBox(
-            height: 10,
+            height: MediaQueryHelper.sizeFromHeight(context, 20),
           ),
 
-          Text(
-            'Team Description',
-            style: mediumStyle,
+          SizedBox(
+            height: MediaQueryHelper.sizeFromHeight(context, 20),
+            child: Text(
+              'Team description:',
+              style: mediumStyle,
+            ),
           ),
+          
 
           // Team member
           Text(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_app1/layout/sign_up_page.dart';
+import 'package:login_app1/shared/styles/colors.dart';
+import 'package:login_app1/shared/styles/styles.dart';
 
 import '../shared/components/components.dart';
 import 'browsing_teams/browse_view.dart';
@@ -22,25 +24,23 @@ class StartPage extends StatelessWidget {
               children: [
                 ButtonTemplate(
                   color: Color.fromARGB(255, 61, 151, 181),
-                  text1: "Sign In",
+                  text1: "Sign Up",
                   text2: " as a ",
                   text3: "Team Leader",
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignInPage()));
+                        MaterialPageRoute(builder: (context) => SignUpPage()));
                   },
                 ),
                 SizedBox(
                   height: spaceBetweenButtons,
                 ),
                 ButtonTemplate(
-                  color: Color.fromARGB(255, 61, 187, 227),
-                  text1: "Browse",
-                  text2: " as a ",
-                  text3: "Team Member",
+                  color: Color.fromARGB(255, 61, 151, 181),
+                  text1: "Sign in",
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => BrowseView()));
+                        MaterialPageRoute(builder: (context) => SignInPage()));
                   },
                 ),
                 SizedBox(
@@ -72,16 +72,35 @@ class StartPage extends StatelessWidget {
                 SizedBox(
                   height: spaceBetweenButtons,
                 ),
-                ButtonTemplate(
-                  color: Color.fromARGB(255, 61, 151, 181),
-                  text1: "Sign Up",
-                  text2: " as a ",
-                  text3: "Team Leader",
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignUpPage()));
-                  },
-                ),
+                TextButton(
+
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => BrowseView()));
+                    },
+                    child: RichText(
+                      text: TextSpan(
+                          text: 'Browse ',
+                          style: AppTextStyles.boldtitles
+                              .copyWith(color: AppColors.background),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: 'teams',
+                              style: AppTextStyles.w400
+                                  .copyWith(color: AppColors.background),
+                            )
+                          ]),
+                    ))
+                // ButtonTemplate(
+                //   color: Color.fromARGB(255, 61, 151, 181),
+                //   text1: "Sign Up",
+                //   text2: " as a ",
+                //   text3: "Team Leader",
+                //   onPressed: () {
+                //     Navigator.push(context,
+                //         MaterialPageRoute(builder: (context) => SignUpPage()));
+                //   },
+                // ),
               ],
             ),
           ),

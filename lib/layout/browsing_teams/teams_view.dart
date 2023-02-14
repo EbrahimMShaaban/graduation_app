@@ -21,70 +21,121 @@ class TeamView extends StatelessWidget {
           return Scaffold(
               body: state is AllTeamsSuccessState
                   // TeamCubit.get(context).allTeamsmodel != null
-                  ? SafeArea(
-
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                          //color: Colors.greenAccent,
-                          height: MediaQuery.of(context).size.height,
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(top: 20, bottom: 20),
-                                child: Text(
-                                  "General",
-                                  style: AppTextStyles.boldtitles,
-                                ),
-                              ),
-                              Container(
-                                // color: Colors.black,
-                                width: MediaQueryHelper.sizeFromWidth(context, 1.5),
-                                height:
-                                    MediaQueryHelper.sizeFromHeight(context, 1.1),
-                                child: ListView.builder(
-                                    // itemCount: teamCubit?.teams?.length,
-                                    itemCount: teamCubit?.teams?.length,
-                                    itemBuilder: (context, index) {
-                                      print(teamCubit?.teams?.length);
-                                      print("teeeeeeeeeems is${teamCubit?.teams}");
-                                      return TeamsName(
-                                          name:
-                                              "${teamCubit?.teams?[index].attributes!.title}",
-                                          onPressed: () {
-                                            Navigator.of(context).pushReplacement(
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        TeamDiscription(
-                                                          allTeams: teamCubit
-                                                              ?.teams?[index],
-                                                          // teams:
-                                                          //     teamCubit?.teams!?[index],
-                                                        )));
-                                          });
-                                    }),
-                              ),
-                              Expanded(
-                                child: SizedBox(
-                                  height: 50,
-                                  child: Center(
-                                    child: Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text("return"),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
+                  ? Container(
+                      //color: Colors.greenAccent,
+                      height: MediaQuery.of(context).size.height,
+                      child: Column(children: [
+                        Padding(
+                          padding: EdgeInsets.only(top: 20, bottom: 20),
+                          child: Text(
+                            type ? "General" : 'Credit',
+                            style: AppTextStyles.boldtitles,
                           ),
                         ),
-                    ),
-                  )
+                        Container(
+                          // color: Colors.black,
+                          width: MediaQueryHelper.sizeFromWidth(context, 1.5),
+                          height: MediaQueryHelper.sizeFromHeight(context, 1.1),
+                          child: ListView.builder(
+                              // itemCount: teamCubit?.teams?.length,
+                              itemCount: teamCubit?.teams?.length,
+                              itemBuilder: (context, index) {
+                                print(teamCubit?.teams?.length);
+                                print("teeeeeeeeeems is${teamCubit?.teams}");
+                                return TeamsName(
+                                    name:
+                                        "${teamCubit?.teams?[index].attributes!.title}",
+                                    onPressed: () {
+                                      Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TeamDiscription(
+                                                    allTeams: teamCubit
+                                                        ?.teams?[index],
+                                                    // teams:
+                                                    //     teamCubit?.teams!?[index],
+                                                  )));
+                                    });
+                              }),
+                        ),
+                        Expanded(
+                            child: SizedBox(
+                                height: 50,
+                                child: Center(
+                                    child: Align(
+                                        alignment: Alignment.bottomCenter,
+                                        child: TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text("return"),
+                                        )))))
+                      ]))
+//                   ? SafeArea(
+//
+//                     child: Padding(
+//                       padding: const EdgeInsets.all(8.0),
+//                       child: Container(
+//                           //color: Colors.greenAccent,
+//                           height: MediaQuery.of(context).size.height,
+//                           child: Column(
+//                             children: [
+//                               Padding(
+//                                 padding: EdgeInsets.only(top: 20, bottom: 20),
+//                                 child: Text(
+//                                   "General",
+//                                   style: AppTextStyles.boldtitles,
+// >>>>>>> c6fbd013df77338fb22cd465745ab64e462432ff
+//                                 ),
+//                               ),
+//                               Container(
+//                                 // color: Colors.black,
+//                                 width: MediaQueryHelper.sizeFromWidth(context, 1.5),
+//                                 height:
+//                                     MediaQueryHelper.sizeFromHeight(context, 1.1),
+//                                 child: ListView.builder(
+//                                     // itemCount: teamCubit?.teams?.length,
+//                                     itemCount: teamCubit?.teams?.length,
+//                                     itemBuilder: (context, index) {
+//                                       print(teamCubit?.teams?.length);
+//                                       print("teeeeeeeeeems is${teamCubit?.teams}");
+//                                       return TeamsName(
+//                                           name:
+//                                               "${teamCubit?.teams?[index].attributes!.title}",
+//                                           onPressed: () {
+//                                             Navigator.of(context).pushReplacement(
+//                                                 MaterialPageRoute(
+//                                                     builder: (context) =>
+//                                                         TeamDiscription(
+//                                                           allTeams: teamCubit
+//                                                               ?.teams?[index],
+//                                                           // teams:
+//                                                           //     teamCubit?.teams!?[index],
+//                                                         )));
+//                                           });
+//                                     }),
+//                               ),
+//                               Expanded(
+//                                 child: SizedBox(
+//                                   height: 50,
+//                                   child: Center(
+//                                     child: Align(
+//                                       alignment: Alignment.bottomCenter,
+//                                       child: TextButton(
+//                                         onPressed: () {
+//                                           Navigator.pop(context);
+//                                         },
+//                                         child: Text("return"),
+//                                       ),
+//                                     ),
+//                                   ),
+//                                 ),
+//                               )
+//                             ],
+//                           ),
+//                         ),
+//                     ),
+//                   )
                   : Center(
                       child: CircularProgressIndicator(),
                     ));
