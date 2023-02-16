@@ -59,7 +59,7 @@ class _AddTeamState extends State<AddTeam> {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                      EdgeInsets.symmetric(horizontal: 20, vertical:3),
                 ),
                 maxLines: 5,
                 // <-- SEE HERE
@@ -147,6 +147,7 @@ class _AddTeamState extends State<AddTeam> {
           child: TextField(
             textAlignVertical: TextAlignVertical.top,
             controller: teamNeeds,
+
             style: TextStyle(
                 fontSize: 20,
                 height: 1.5,
@@ -154,11 +155,11 @@ class _AddTeamState extends State<AddTeam> {
                 color: Colors.black54),
             decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             ),
-            maxLines: 5,
+            maxLines: 15,
             // <-- SEE HERE
-            minLines: 1, //
+            minLines: 3, //
             // <
           ),
         ),

@@ -69,7 +69,7 @@ class _EditTeamState extends State<EditTeam> {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   contentPadding:
-                  EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                  EdgeInsets.symmetric(horizontal: 20, vertical: 3),
                 ),
                 maxLines: 5,
                 // <-- SEE HERE
@@ -153,7 +153,10 @@ class _EditTeamState extends State<EditTeam> {
             borderRadius: BorderRadius.all(
                 Radius.circular(30.0)), // set rounded corner radius
           ),
+
+          //تظبيط ال pading و الكنتينر كلة يتظبط على التيكست فورم فيلد
           child: TextFormField(
+
             textAlignVertical: TextAlignVertical.top,
             controller: teamNeeds,
 
@@ -171,9 +174,9 @@ class _EditTeamState extends State<EditTeam> {
                 color: Colors.black54),
             decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             ),
-            maxLines: 5,
+            maxLines: 15,
             // <-- SEE HERE
             minLines: 1, //
             // <
@@ -193,7 +196,9 @@ class _EditTeamState extends State<EditTeam> {
         print("عاااااااااااااااااااااااااااا");
         if (state is UpdataTeamSuccessState) {
           navigateAndFinished(context, YourTeamScreen());
-        } else {}
+        } else {
+          
+        }
       },
       builder: (context, state) {
         return Scaffold(

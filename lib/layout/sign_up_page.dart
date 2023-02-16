@@ -185,7 +185,7 @@ class SignUpPage extends StatelessWidget {
                   ],
                 ),
               ),
-              BottomText(),
+              // BottomText(),
               SizedBox(
                 height: 20,
               )

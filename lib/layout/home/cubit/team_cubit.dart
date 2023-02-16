@@ -71,8 +71,8 @@ class TeamCubit extends Cubit<TeamStates> {
 
       emit(DeletSuccessState());
 
-        navigateAndFinished(context, LeaderWelcomePage());
-      CacheHelper.removeToken(key: 'team_id');
+      navigateAndFinished(context, LeaderWelcomePage());
+      CacheHelper.removeToken(key:'team_id');
 
     }).catchError((error) {
       print(error);

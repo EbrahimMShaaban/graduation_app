@@ -30,7 +30,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
           return state is DeletLoadingtState
               ? Center(child: CircularProgressIndicator())
               : AlertDialog(
-                  title: const Text('Remove your team Are you sure?'),
+                  title: const Text('Remove your team \n Are you sure?'),
                   // content: const Text('Are you sure to remove the box?'),
                   actions: [
                     // The "Yes" button
@@ -42,8 +42,9 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
                             _isShown = false;
                             TeamCubit.get(context).DeletMyTeam(context);
                           });
-
-
+                          if (state is DeletSuccessState)
+                            CacheHelper.removeToken(key: 'team_id');
+                          ;
                         },
                         child: const Text(
                           'Yes',
@@ -68,23 +69,25 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Your Team",
-            style: boldStyle,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            'Team Name :',
-            style: mediumStyle,
-          ),
-
-          // name leader //////////////////////////////////////////////////
-          Text(
             data!.team.attributes.title,
-            style: labelStyle,
+            style: boldStyle.apply(fontSizeDelta: -9),
           ),
- SizedBox(height: 25,),
+          // SizedBox(
+          //   height: 20,
+          // ),
+          // Text(
+          //   'Team Name :',
+          //   style: mediumStyle,
+          // ),
+          //
+          // // name leader //////////////////////////////////////////////////
+          // Text(
+          //   data!.team.attributes.title,
+          //   style: labelStyle,
+          // ),
+          SizedBox(
+            height: 25,
+          ),
 
           Text(
             'Team Description :',
@@ -100,6 +103,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
           //Team Needs
 
           Expanded(
+
             child: Align(
               alignment: FractionalOffset.bottomCenter,
               child: Button(state, data),
@@ -111,7 +115,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
     ));
   }
 
-  Widget Button(state,MyTeam data) {
+  Widget Button(state, MyTeam data) {
     return Container(
       height: MediaQuery.of(context).size.height / 5,
       child: Row(
@@ -130,9 +134,11 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
               text: "Edit",
               container: false,
               onTap: () {
-                navigateAndReplace(context, EditTeam(
-                     data: data,
-                ));
+                navigateAndReplace(
+                    context,
+                    EditTeam(
+                      data: data,
+                    ));
               },
               color: AppColors.blue),
           TextInkWell(
