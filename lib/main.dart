@@ -63,12 +63,7 @@ class MyApp extends StatelessWidget {
     ));
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (BuildContext context) => TeamCubit()
-          //..getMyTeam()
-            // ..getMyTeam()
-            // ..getAllTeams(),
-
-            )
+        BlocProvider(create: (BuildContext context) => TeamCubit()         )
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
