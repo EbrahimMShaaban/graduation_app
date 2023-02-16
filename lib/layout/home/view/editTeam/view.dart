@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_app1/layout/home/cubit/team_cubit.dart';
+import 'package:login_app1/models/model_myteam.dart';
 import 'package:login_app1/shared/components/constants.dart';
 import 'package:login_app1/shared/styles/colors.dart';
 import 'package:login_app1/shared/styles/mu_styal.dart';
@@ -12,18 +13,28 @@ import '../yourTeam/view.dart';
 List<String>? list = <String>['credit', 'general'];
 
 class EditTeam extends StatefulWidget {
-  const EditTeam({Key? key}) : super(key: key);
-
+  const EditTeam({Key? key, required this.data}) : super(key: key);
+ final MyTeam data;
   @override
   State<EditTeam> createState() => _EditTeamState();
 }
 
 class _EditTeamState extends State<EditTeam> {
   TextEditingController teamMembers = TextEditingController();
-  late String teamType ;
-  TextEditingController teamNeeds = TextEditingController();
-  String? dropdownValue = list?.first;
 
+  TextEditingController teamNeeds = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  String dropdownValue = "credit";
+
+  @override
+  void initState() {
+    String _teamMembers = widget.data.team.attributes.title;
+   String _teamNeeds = widget.data.team.attributes.body;
+    teamMembers = TextEditingController(text: _teamMembers);
+    teamNeeds = TextEditingController(text: _teamNeeds);
+    dropdownValue = widget.data.team.attributes.type;
+    super.initState();
+  }
   Widget addMembers() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,7 +58,7 @@ class _EditTeamState extends State<EditTeam> {
                 borderRadius: BorderRadius.all(
                     Radius.circular(30.0)), // set rounded corner radius
               ),
-              child: TextField(
+              child: TextFormField(
                 textAlignVertical: TextAlignVertical.top,
                 controller: teamMembers,
                 style: TextStyle(
@@ -58,7 +69,7 @@ class _EditTeamState extends State<EditTeam> {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   contentPadding:
-                  EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                  EdgeInsets.symmetric(horizontal: 20, vertical: 3),
                 ),
                 maxLines: 5,
                 // <-- SEE HERE
@@ -90,18 +101,14 @@ class _EditTeamState extends State<EditTeam> {
                 child: DropdownButton<String>(
                   value: dropdownValue,
                   elevation: 50,
-                  style: const TextStyle(color: Colors.black,fontSize: 25),
-
+                  style: const TextStyle(color: Colors.black, fontSize: 25),
                   onChanged: (String? value) {
                     setState(() {
                       dropdownValue = value!;
-                      print(value);
-                      teamType=value;
                     });
                     // This is called when the user selects an item.
                   },
                   items: list?.map<DropdownMenuItem<String>>((String value) {
-
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
@@ -137,15 +144,29 @@ class _EditTeamState extends State<EditTeam> {
           height: 15,
         ),
         Container(
-          height: MediaQuery.of(context).size.height / 2,
+          height: MediaQuery
+              .of(context)
+              .size
+              .height / 2,
           decoration: const BoxDecoration(
             color: AppColors.grey,
             borderRadius: BorderRadius.all(
                 Radius.circular(30.0)), // set rounded corner radius
           ),
-          child: TextField(
+
+          //تظبيط ال pading و الكنتينر كلة يتظبط على التيكست فورم فيلد
+          child: TextFormField(
+
             textAlignVertical: TextAlignVertical.top,
             controller: teamNeeds,
+
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Dddddddddddd";
+              } else {
+                return null;
+              }
+            },
             style: TextStyle(
                 fontSize: 20,
                 height: 1.5,
@@ -153,9 +174,9 @@ class _EditTeamState extends State<EditTeam> {
                 color: Colors.black54),
             decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             ),
-            maxLines: 5,
+            maxLines: 15,
             // <-- SEE HERE
             minLines: 1, //
             // <
@@ -167,91 +188,91 @@ class _EditTeamState extends State<EditTeam> {
 
   @override
   Widget build(BuildContext context) {
+    // TeamCubit? teamCubit = TeamCubit.get(context);
+
     return BlocConsumer<TeamCubit, TeamStates>(
       listener: (context, state) {
-
         print(state);
         print("عاااااااااااااااااااااااااااا");
         if (state is UpdataTeamSuccessState) {
-
           navigateAndFinished(context, YourTeamScreen());
         } else {
-
-
+          
         }
       },
       builder: (context, state) {
-        TeamCubit? teamCubit = TeamCubit.get(context);
-        teamMembers.text=teamCubit.myTeam!.team.attributes.title;
-        teamNeeds.text=teamCubit.myTeam!.team.attributes.body;
-        teamType=teamCubit.myTeam!.team.attributes.type;
         return Scaffold(
             backgroundColor: AppColors.white,
-            body: SingleChildScrollView(
-              child: Padding(
-                padding:
-                const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-                child: SafeArea(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Add a team',
-                        style: boldStyle,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      addMembers(),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      yourNeed(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Align(
-                        alignment: FractionalOffset.bottomCenter,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            TextInkWell(
-                              text: "Return",
-                              onTap: () {
-                                navigateTo(context, YourTeamScreen());
-                              },
-                              color: AppColors.greyDark,
-                              container: false,
-                            ),
-
-                            state is UpdataTeamLoadingtState
-                                ? Center(
-                              child: CircularProgressIndicator(
-                                  color: primarycolor),
-                            )
-                                : TextInkWell(
-                              text: "Submit",
-                              onTap: () async {
-                                teamCubit.EditTeam(
-                                    teamMembers: teamMembers.text,
-                                    teamNeeds: teamNeeds.text,
-                                    Type: teamType);
-                              },
-                              color: AppColors.blue,
-                              container: true,
-                            ),
-                            // ConditionalBuilder(
-                            //   condition: ,
-                            //   builder: (context) =>
-                            //   fallback: (context) => const Center(
-                            //     child: CircularProgressIndicator(),
-                            //   ),
-                            // ),
-                          ],
+            body: Form(
+              key: formKey,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                  child: SafeArea(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (state is UpdataTeamLoadingtState)
+                          LinearProgressIndicator(),
+                        Text(
+                          'Edit a team',
+                          style: boldStyle,
                         ),
-                      ),
-                    ],
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        addMembers(),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        yourNeed(),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Align(
+                          alignment: FractionalOffset.bottomCenter,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              TextInkWell(
+                                text: "Return",
+                                onTap: () {
+                                  navigateTo(context, YourTeamScreen());
+                                },
+                                color: AppColors.greyDark,
+                                container: false,
+                              ),
+
+                              state is UpdataTeamLoadingtState
+                                  ? Center(
+                                child: CircularProgressIndicator(
+                                    color: primarycolor),
+                              )
+                                  : TextInkWell(
+                                text: "Submit",
+                                onTap: () {
+                                  TeamCubit.get(context).EditTeam(
+                                      teamMembers: teamMembers.text,
+                                      teamNeeds: teamNeeds.text,
+                                      type: dropdownValue);
+                                },
+                                color: AppColors.blue,
+                                container: true,
+                              ),
+                              // ConditionalBuilder(
+                              //   condition: ,
+                              //   builder: (context) =>
+                              //   fallback: (context) => const Center(
+                              //     child: CircularProgressIndicator(),
+                              //   ),
+                              // ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

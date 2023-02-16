@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:login_app1/layout/leader_welcome_page.dart';
 import 'package:login_app1/models/User.dart';
 import 'package:login_app1/models/allteams_model.dart';
+import 'package:login_app1/shared/components/navigator.dart';
 
 import 'package:meta/meta.dart';
 
@@ -9,6 +11,7 @@ import '../../../../../shared/network/remote/dio_helper.dart';
 import '../../../../../shared/network/remote/end_points.dart';
 import '../../../models/CreateTeam.dart';
 import '../../../models/model_myteam.dart';
+import '../../../shared/network/local/shared_preferences.dart';
 
 part 'team_state.dart';
 
@@ -43,6 +46,9 @@ class TeamCubit extends Cubit<TeamStates> {
       // print(myTeam!.team.id);
 
       emit(MyTeamSuccessState());
+
+      print(team_id);
+      print("team_id");
     }).catchError((error) {
       print(error);
      print("00000000000000000000000ddddddddddddddddddddddd000000");
@@ -50,7 +56,7 @@ class TeamCubit extends Cubit<TeamStates> {
     });
   }
 
-  void DeletMyTeam() {
+  void DeletMyTeam(context) {
 
     print(myTeams+myTeam!.team.id);
     emit(DeletLoadingtState());
@@ -64,6 +70,10 @@ class TeamCubit extends Cubit<TeamStates> {
     ).then((value) {
 
       emit(DeletSuccessState());
+
+      navigateAndFinished(context, LeaderWelcomePage());
+      CacheHelper.removeToken(key:'team_id');
+
     }).catchError((error) {
       print(error);
       emit(DeletErrorState());
@@ -122,7 +132,12 @@ class TeamCubit extends Cubit<TeamStates> {
       createTeamModel= CreateTeamModel.fromJson(value.data);
       print(createTeamModel?.team.id);
       print(createTeamModel?.team.id);
-      team_id=value.data["team"]["id"].toString();
+      team_id=value.data["team"]["id"];
+      CacheHelper.saveData(
+          key: 'team_id', value: value.data["team"]["id"]);
+      print(team_id);
+      print("ddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+      print(value.data["team"]["id"].toString());
       emit(CreateTeamSuccessState());
     }).catchError((error) {
       print(token);
@@ -135,7 +150,7 @@ class TeamCubit extends Cubit<TeamStates> {
 
   void EditTeam({
     required String teamMembers,
-    required String Type,
+    required String type,
     required String teamNeeds,
   }) async {
     print(teamMembers);
@@ -147,7 +162,7 @@ class TeamCubit extends Cubit<TeamStates> {
       posteddata: {
         "title": teamMembers,
         "body": teamNeeds,
-        "type": "credit",
+        "type": type,
       },
       headers: {
         'Content-Type': 'application/json',

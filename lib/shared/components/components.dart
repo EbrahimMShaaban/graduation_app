@@ -89,7 +89,7 @@ class BottomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(
+    return Align(child:  RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
             text: "",
@@ -102,7 +102,7 @@ class BottomText extends StatelessWidget {
                   text: "FCIS - ",
                   style: TextStyle(fontWeight: FontWeight.bold)),
               TextSpan(text: "Facult of comuters \n and informatoin science"),
-            ]));
+            ])),);
   }
 }
 
@@ -203,7 +203,7 @@ class TeamsName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0),
+      padding: EdgeInsets.symmetric(vertical: 10.0),
       child: Container(
       //  color: Colors.red,
 

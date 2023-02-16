@@ -139,6 +139,9 @@ class SignUpPage extends StatelessWidget {
                                 //  confirmPassword: confirmPassword.text
                               )
                                   .then((value) {
+                               // if (value == "done") {
+
+
                                 // if (value == "done") {
                                 // navigateAndFinished(
                                 //     context, LeaderWelcomePage());
@@ -152,17 +155,17 @@ class SignUpPage extends StatelessWidget {
                                 //      showMyDialog(signUpCubit.message, context);
                                 //    }
                                 // if (value == "done") {
-                                if (state is SignUpSuccessState) {
+                                CacheHelper.saveData(
+                                    key: 'token', value: User.token);
+                                CacheHelper.saveData(
+                                    key: 'name', value: User.name);
+                                CacheHelper.saveData(
+                                    key: 'team_id', value: User.team_id);
                                   navigateAndFinished(
                                       context, LeaderWelcomePage());
 
-                                  CacheHelper.saveData(
-                                      key: 'token', value: User.token);
-                                  CacheHelper.saveData(
-                                      key: 'name', value: User.name);
-                                  CacheHelper.saveData(
-                                      key: 'team_id', value: User.team_id);
-                                }
+
+
                                 //    Navigator.push(
                                 //        context,
                                 //        MaterialPageRoute(
@@ -182,7 +185,7 @@ class SignUpPage extends StatelessWidget {
                   ],
                 ),
               ),
-              BottomText(),
+              // BottomText(),
               SizedBox(
                 height: 20,
               )

@@ -11,16 +11,20 @@ import 'package:login_app1/shared/styles/colors.dart';
 import 'layout/leader_welcome_page.dart';
 import 'models/User.dart';
 import 'shared/network/remote/dio_helper.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() async {
+
+
+
   WidgetsFlutterBinding.ensureInitialized();
   await DioHelper.init();
   await DioHelper.init();
   await CacheHelper.init();
   final Widget startWidget;
   token = CacheHelper.getData(key: 'token');
-  name = CacheHelper.getData(key: 'name');
-  team_id = CacheHelper.getData(key: 'team_id');
+  myName = CacheHelper.getData(key: 'name');
+  team_id = CacheHelper.getData(key:'team_id');
 
     if (token != null) {
     startWidget = LeaderWelcomePage();
@@ -39,6 +43,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+
     final Widget startWidget;
 
   const MyApp({

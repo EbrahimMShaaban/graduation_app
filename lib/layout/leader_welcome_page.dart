@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:login_app1/Controllers/Login_cubit/logincubit.dart';
 import 'package:login_app1/layout/browsing_teams/browse_view.dart';
-import 'package:login_app1/layout/home/view/add_a_team/view.dart';
 import 'package:login_app1/layout/home/view/don,t_have_team/view.dart';
 import 'package:login_app1/layout/home/view/yourTeam/view.dart';
 import 'package:login_app1/layout/start_page.dart';
 import 'package:login_app1/models/User.dart';
-import 'package:login_app1/models/model_myteam.dart';
 import 'package:login_app1/shared/components/components.dart';
 import 'package:login_app1/shared/components/constants.dart';
 import 'package:login_app1/shared/components/navigator.dart';
@@ -60,10 +57,14 @@ class _LeaderWelcomePageState extends State<LeaderWelcomePage> {
 
   @override
   Widget build(BuildContext context) {
+    team_id = CacheHelper.getData(key:'team_id');
+
+    print(myName);
+    print(token);
+    print(team_id);
     return Scaffold(
 
       appBar: AppBar(
-
         actions: [
           IconButton(
               onPressed: _isShown == true ? () => _delete(context) : null,
@@ -73,7 +74,7 @@ class _LeaderWelcomePageState extends State<LeaderWelcomePage> {
               ))
         ],
       ),
-      body: User.name != null || name != null
+      body: User.name != null || myName != null
           ? Container(
               child: Center(
                 child: Column(
@@ -89,7 +90,7 @@ class _LeaderWelcomePageState extends State<LeaderWelcomePage> {
                             "Welcome,",
                             style: TextStyle(fontSize: 40),
                           ),
-                          Text(name,
+                          Text(myName,
                               style: TextStyle(
                                   fontSize: 35, fontWeight: FontWeight.bold)),
                         ],
@@ -103,9 +104,7 @@ class _LeaderWelcomePageState extends State<LeaderWelcomePage> {
                         NavigateToOption(
                           name: "Your Team",
                           onPressed: () {
-                            print(User.token);
-                            print(User.team_id);
-                            if (User.team_id == "null") {
+                            if (team_id == "null" ||team_id == null) {
                               return navigateTo(context, DontHaveTeame());
                             } else {
                               return navigateTo(context, YourTeamScreen());
@@ -115,7 +114,7 @@ class _LeaderWelcomePageState extends State<LeaderWelcomePage> {
                         NavigateToOption(
                           name: "Browse Teams",
                           onPressed: () {
-                            navigateTo(context, YourTeamScreen());
+                            navigateTo(context, BrowseView());
                           },
                         ),
                       ],
@@ -131,6 +130,8 @@ class _LeaderWelcomePageState extends State<LeaderWelcomePage> {
 
 void signout(context) {
   CacheHelper.removeToken(key: 'token').then((value) {
+    CacheHelper.removeToken(key: 'name');
+    CacheHelper.removeToken(key: 'team_id');
     navigateAndFinished(context, StartPage());
   });
 }
