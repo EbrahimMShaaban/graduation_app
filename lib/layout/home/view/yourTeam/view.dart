@@ -23,7 +23,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
   @override
   bool _isShown = true;
 
-  void _delete(BuildContext context, state) {
+  void _delete(BuildContext context,TeamStates state) {
     showDialog(
         context: context,
         builder: (BuildContext ctx) {
@@ -40,11 +40,20 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
 
                           setState(() {
                             _isShown = false;
-                            TeamCubit.get(context).DeletMyTeam(context);
-                          });
-                          if (state is DeletSuccessState)
-                            CacheHelper.removeToken(key: 'team_id');
-                          ;
+
+                            print(state);
+
+
+                          });TeamCubit.get(context).DeletMyTeam(context);
+
+                            print("يااااااااااااااااااارب");        print(state);
+                            print("يااااااااااااااااااارب");
+                            print("يااااااااااااااااااارب");        print(state);
+                            print("يااااااااااااااااااارب");
+
+
+
+
                         },
                         child: const Text(
                           'Yes',
@@ -61,7 +70,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
         });
   }
 
-  Widget screenView(MyTeam? data, state) {
+  Widget screenView(MyTeam? data,TeamStates state) {
     return SafeArea(
         child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
@@ -115,7 +124,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
     ));
   }
 
-  Widget Button(state, MyTeam data) {
+  Widget Button(TeamStates state, MyTeam data) {
     return Container(
       height: MediaQuery.of(context).size.height / 5,
       child: Row(
@@ -164,7 +173,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
         return Scaffold(
           body: state is MyTeamSuccessState
               // TeamCubit.get(context).createTeamModel !=null
-              ? screenView(TeamCubit.get(context).myTeam, state)
+              ? screenView(TeamCubit.get(context).myTeam, state )
               : Center(child: CircularProgressIndicator()),
         );
       },

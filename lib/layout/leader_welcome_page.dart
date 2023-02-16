@@ -104,7 +104,7 @@ class _LeaderWelcomePageState extends State<LeaderWelcomePage> {
                         NavigateToOption(
                           name: "Your Team",
                           onPressed: () {
-                            if (team_id == "null") {
+                            if (team_id == "null" ||team_id == null) {
                               return navigateTo(context, DontHaveTeame());
                             } else {
                               return navigateTo(context, YourTeamScreen());
