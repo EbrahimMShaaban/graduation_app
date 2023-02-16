@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:login_app1/Controllers/Login_cubit/logincubit.dart';
 import 'package:login_app1/layout/browsing_teams/browse_view.dart';
-import 'package:login_app1/layout/home/view/add_a_team/view.dart';
 import 'package:login_app1/layout/home/view/don,t_have_team/view.dart';
 import 'package:login_app1/layout/home/view/yourTeam/view.dart';
 import 'package:login_app1/layout/start_page.dart';
 import 'package:login_app1/models/User.dart';
-import 'package:login_app1/models/model_myteam.dart';
 import 'package:login_app1/shared/components/components.dart';
 import 'package:login_app1/shared/components/constants.dart';
 import 'package:login_app1/shared/components/navigator.dart';
@@ -60,6 +57,8 @@ class _LeaderWelcomePageState extends State<LeaderWelcomePage> {
 
   @override
   Widget build(BuildContext context) {
+    team_id = CacheHelper.getData(key:'team_id');
+
     print(myName);
     print(token);
     print(team_id);
@@ -115,7 +114,7 @@ class _LeaderWelcomePageState extends State<LeaderWelcomePage> {
                         NavigateToOption(
                           name: "Browse Teams",
                           onPressed: () {
-                            navigateTo(context, YourTeamScreen());
+                            navigateTo(context, BrowseView());
                           },
                         ),
                       ],

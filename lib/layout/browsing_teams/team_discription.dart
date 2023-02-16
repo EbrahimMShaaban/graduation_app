@@ -4,6 +4,7 @@ import 'package:login_app1/shared/components/constants.dart';
 
 import '../../../../shared/styles/mu_styal.dart';
 import '../../models/allteams_model.dart';
+import '../../shared/styles/styles.dart';
 import '../home/cubit/team_cubit.dart';
 
 class TeamDiscription extends StatelessWidget {
@@ -27,7 +28,7 @@ class TeamDiscription extends StatelessWidget {
         children: [
           Text(
             '${allTeams?.attributes?.title}',
-            style: boldStyle,
+            style: boldStyle.apply(fontSizeDelta: -3),
           ),
           SizedBox(
             height: MediaQueryHelper.sizeFromHeight(context, 20),
@@ -40,12 +41,14 @@ class TeamDiscription extends StatelessWidget {
               style: mediumStyle,
             ),
           ),
-          
+          SizedBox(
+            height: 10,
+          ),
 
           // Team member
           Text(
             '${allTeams?.attributes?.body}',
-            style: labelStyle,
+            style: labelStyle.apply(fontSizeDelta: -5),
           ),
 
           //Team Needs
@@ -67,7 +70,10 @@ class TeamDiscription extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text("return"),
+                    child: Text(
+                      "return",
+                      style: AppTextStyles.boldtitles.apply(fontSizeDelta: 7),
+                    ),
                   ),
                 ),
               ),
