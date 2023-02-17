@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_app1/shared/components/constants.dart';
+import 'package:login_app1/shared/styles/colors.dart';
 
 import '../../../../shared/styles/mu_styal.dart';
 import '../../models/allteams_model.dart';
@@ -28,7 +29,9 @@ class TeamDiscription extends StatelessWidget {
         children: [
           Text(
             '${allTeams?.attributes?.title}',
-            style: boldStyle.apply(fontSizeDelta: -3),
+            maxLines: 2,
+            overflow: TextOverflow.fade,
+            style: boldStyle.apply(fontSizeDelta: -3,color: AppColors.background),
           ),
           SizedBox(
             height: MediaQueryHelper.sizeFromHeight(context, 20),
@@ -51,15 +54,7 @@ class TeamDiscription extends StatelessWidget {
             style: labelStyle.apply(fontSizeDelta: -5),
           ),
 
-          //Team Needs
 
-          // Expanded(
-          //   child: Align(
-          //     alignment: FractionalOffset.bottomCenter,
-          //     child: Button(),
-          //   ),
-          // ),
-          //Button
           Expanded(
             child: SizedBox(
               height: 50,
@@ -84,38 +79,7 @@ class TeamDiscription extends StatelessWidget {
     ));
   }
 
-  // Widget Button() {
-  //   return Container(
-  //     height: MediaQuery.of(context).size.height / 5,
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //       crossAxisAlignment: CrossAxisAlignment.end,
-  //       children: [
-  //         TextInkWell(
-  //           text: "Return",
-  //           onTap: () {
-  //             Navigator.pop(context);
-  //           },
-  //           color: AppColors.greyDark,
-  //           container: false,
-  //         ),
-  //         TextInkWell(
-  //             text: "Edit",
-  //             container: false,
-  //             onTap: () {
-  //               navigateTo(context, EditTeam());
-  //             },
-  //             color: AppColors.blue),
-  //         TextInkWell(
-  //           text: "Remove",
-  //           onTap: () {},
-  //           color: AppColors.red,
-  //           container: false,
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+
 
   @override
   Widget build(BuildContext context) {

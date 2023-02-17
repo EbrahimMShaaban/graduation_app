@@ -1,17 +1,21 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_app1/layout/leader_welcome_page.dart';
 import 'package:login_app1/models/User.dart';
 import 'package:login_app1/models/allteams_model.dart';
+import 'package:login_app1/shared/components/components.dart';
 import 'package:login_app1/shared/components/navigator.dart';
 
 import 'package:meta/meta.dart';
+import 'package:motion_toast/motion_toast.dart';
 
 import '../../../../../shared/network/remote/dio_helper.dart';
 import '../../../../../shared/network/remote/end_points.dart';
 import '../../../models/CreateTeam.dart';
 import '../../../models/model_myteam.dart';
 import '../../../shared/network/local/shared_preferences.dart';
+import 'package:flutter/material.dart';
 
 part 'team_state.dart';
 
@@ -98,12 +102,18 @@ class TeamCubit extends Cubit<TeamStates> {
     //  print(allTeamsmodel!.team?.attributes?.body);
 
       emit(AllTeamsSuccessState());
-    }).catchError((error) {
-      print(error);
+    }).catchError((e) {
+     // DioError error = e as DioError;
+      // print(error.response);
+      // MotionToast.error(
+      //   description:  Text(error.response!.data["message"].toString()),
+      // ) .show(context);
+     // print(error);
+      //toast();
       print(allTeamsmodel!.teams?[1].attributes?.type);
 
       print("00000000000000000000000000000");
-      emit(AllTeamsErrorState(message: error));
+      emit(AllTeamsErrorState(message: e));
     });
   }
 

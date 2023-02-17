@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login_app1/models/allteams_model.dart';
 import 'package:login_app1/shared/components/constants.dart';
+import 'package:login_app1/shared/styles/colors.dart';
 import 'package:login_app1/shared/styles/styles.dart';
 
 class ButtonTemplate extends StatelessWidget {
@@ -46,14 +46,13 @@ class ButtonTemplate extends StatelessWidget {
 }
 
 class TextFieldTemplate extends StatelessWidget {
-  TextFieldTemplate(
-      {Key? key,
-      required this.hintText,
-      required this.controller,
-      this.obscureText = false,
-        this.validator,
-      })
-      : super(key: key);
+  TextFieldTemplate({
+    Key? key,
+    required this.hintText,
+    required this.controller,
+    this.obscureText = false,
+    this.validator,
+  }) : super(key: key);
 
   String hintText;
   TextEditingController controller;
@@ -64,18 +63,29 @@ class TextFieldTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 5),
-      child: Material(
-        color: Colors.grey[100],
-        borderRadius: BorderRadius.circular(50),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: TextFormField(
-            obscureText: obscureText,
-            controller: controller,
-            validator: (value) => validator!(value),
-            decoration:
-                InputDecoration(hintText: hintText, border: InputBorder.none),
-          ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: TextFormField(
+          obscureText: obscureText,
+          controller: controller,
+          validator: (value) => validator!(value),
+          decoration: InputDecoration(
+              hintText: hintText,
+              border: InputBorder.none,
+              filled: true,
+              fillColor: AppColors.materialGrey,
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.all(Radius.circular(30))),
+              focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.all(Radius.circular(30))),
+              errorBorder: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.all(Radius.circular(30))),
+              disabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.all(Radius.circular(20)))),
         ),
       ),
     );
@@ -89,20 +99,22 @@ class BottomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(child:  RichText(
-        textAlign: TextAlign.center,
-        text: TextSpan(
-            text: "",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 18,
-            ),
-            children: [
-              TextSpan(
-                  text: "FCIS - ",
-                  style: TextStyle(fontWeight: FontWeight.bold)),
-              TextSpan(text: "Facult of comuters \n and informatoin science"),
-            ])),);
+    return Align(
+      child: RichText(
+          textAlign: TextAlign.center,
+          text: TextSpan(
+              text: "",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+              ),
+              children: [
+                TextSpan(
+                    text: "FCIS - ",
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+                TextSpan(text: "Facult of comuters \n and informatoin science"),
+              ])),
+    );
   }
 }
 
@@ -158,7 +170,7 @@ class NavigateToOption extends StatelessWidget {
         height: 70,
         width: 320,
         child: Material(
-          color: Colors.grey[100],
+          color: AppColors.materialGrey,
           borderRadius: BorderRadius.circular(20),
           child: Padding(
             padding: EdgeInsets.symmetric(
@@ -205,25 +217,23 @@ class TeamsName extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.0),
       child: Container(
-      //  color: Colors.red,
+
 
         height: 100,
         width: 1,
         child: MaterialButton(
-            padding: EdgeInsets.zero,
-            color: Colors.grey[100],
-            shape: RoundedRectangleBorder(
-
-                borderRadius: BorderRadius.circular(20)),
-
-            child:  RichText(
+            padding: EdgeInsets.all(10),
+            color: AppColors.materialGrey,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: RichText(
               text: TextSpan(
                 text: 'Team ',
-                style: AppTextStyles.w300.apply(color: Colors.black,),
-
-                children:  <TextSpan>[
-                  TextSpan(text:  name, style: AppTextStyles.lrTitles),
-
+                style: AppTextStyles.w300.apply(
+                  color: Colors.black,
+                ),
+                children: <TextSpan>[
+                  TextSpan(text: name, style: AppTextStyles.lrTitles),
                 ],
               ),
             ),
@@ -232,3 +242,15 @@ class TeamsName extends StatelessWidget {
     );
   }
 }
+
+// Future<bool?>  toast (){
+//   return Fluttertoast.showToast(
+//       msg: "This is Center Short Toast",
+//       toastLength: Toast.LENGTH_SHORT,
+//       gravity: ToastGravity.CENTER,
+//       timeInSecForIosWeb: 1,
+//       backgroundColor: Colors.red,
+//       textColor: Colors.white,
+//       fontSize: 16.0
+//   );
+// }

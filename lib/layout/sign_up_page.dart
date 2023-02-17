@@ -65,14 +65,16 @@ class SignUpPage extends StatelessWidget {
                                       color: primarycolor)),
                             ])),
                     SizedBox(
-                      height: spaceBetweenButtons,
+                      height: spaceBetweenButtons*2,
                     ),
                     TextFieldTemplate(
                       hintText: "Name",
                       controller: name,
                       validator: (String? value) {
                         if (value!.isEmpty) {
-                          return 'The First name Field is not allowed to be empty ';
+                          return 'Please Write name ';
+                        } else if (value.length<3) {
+                          return 'The name should consist of at least 3 letters.';
                         }
                         return null;
                       },
@@ -82,7 +84,11 @@ class SignUpPage extends StatelessWidget {
                       controller: email,
                       validator: (String? value) {
                         if (value!.isEmpty) {
-                          return 'The First name Field is not allowed to be empty ';
+                          return 'Please Write Email';
+                        } else if (value.length < 5) {
+                          return 'Please write the email correctly';
+                        } else if (!value.toString().contains('@')) {
+                          return ' Email should contain \'@';
                         }
                         return null;
                       },
@@ -92,17 +98,15 @@ class SignUpPage extends StatelessWidget {
                       controller: password,
                       validator: (String? value) {
                         if (value!.isEmpty) {
-                          return 'The First name Field is not allowed to be empty ';
+                          return 'Please Write password';
+                        }else if (value.length<6){
+                          return 'password must more than 6 charcters';
                         }
                         return null;
                       },
                       obscureText: true,
                     ),
-                    // TextFieldTemplate(
-                    //   hintText: "Confirm Password",
-                    //   controller: confirmPassword,
-                    //   obscureText: true,
-                    // ),
+
                     SizedBox(
                       height: spaceBetweenButtons,
                     ),
@@ -128,59 +132,37 @@ class SignUpPage extends StatelessWidget {
                             minwidth: 190,
                             text1: "Sign Up",
                             onPressed: () async {
-                              if (formKey.currentState!.validate()) {}
+                              if (formKey.currentState!.validate()) {
+                                signUpCubit
+                                    .postSignUpDetails(
+                                  context: context,
+                                  name: name.text,
+                                  email: email.text,
+                                  password: password.text,
+                                  //  confirmPassword: confirmPassword.text
+                                )
+                                    .then((value) {
 
-                              signUpCubit
-                                  .postSignUpDetails(
-                                context: context,
-                                name: name.text,
-                                email: email.text,
-                                password: password.text,
-                                //  confirmPassword: confirmPassword.text
-                              )
-                                  .then((value) {
-                               // if (value == "done") {
-
-
-                                // if (value == "done") {
-                                // navigateAndFinished(
-                                //     context, LeaderWelcomePage());
-                                //    Navigator.push(
-                                //        context,
-                                //        MaterialPageRoute(
-                                //            builder: (context) =>
-                                //                LeaderWelcomePage()));
-                                //   }
-                                //    else if (value != "done") {
-                                //      showMyDialog(signUpCubit.message, context);
-                                //    }
-                                // if (value == "done") {
-                                CacheHelper.saveData(
-                                    key: 'token', value: User.token);
-                                CacheHelper.saveData(
-                                    key: 'name', value: User.name);
-                                CacheHelper.saveData(
-                                    key: 'team_id', value: User.team_id);
+                                  CacheHelper.saveData(
+                                      key: 'token', value: User.token);
+                                  CacheHelper.saveData(
+                                      key: 'name', value: User.name);
+                                  CacheHelper.saveData(
+                                      key: 'team_id', value: User.team_id);
                                   navigateAndFinished(
                                       context, LeaderWelcomePage());
 
+                                });
+                              }
 
 
-                                //    Navigator.push(
-                                //        context,
-                                //        MaterialPageRoute(
-                                //            builder: (context) =>
-                                //                LeaderWelcomePage()));
-                                //   }
-                                //    else if (value != "done") {
-                                //      showMyDialog(signUpCubit.message, context);
-                                //    }
-                                //todo:make catch error
-                              });
                             },
                           );
                         }
                       },
+                    ),
+                    SizedBox(
+                      height: spaceBetweenButtons*2,
                     ),
                   ],
                 ),

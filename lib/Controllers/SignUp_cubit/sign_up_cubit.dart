@@ -2,9 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:motion_toast/motion_toast.dart';
 import '../../../models/User.dart';
 import '../../../shared/network/remote/dio_helper.dart';
 import '../../../shared/network/remote/end_points.dart';
+import 'package:flutter/material.dart';
 
 part 'sign_up_state.dart';
 
@@ -53,7 +55,12 @@ class SignUpCubit extends Cubit<SignUpState> {
     } catch (e) {
      // DioError error = e as DioError;
       print(e);
-     // message = error.response!.data["message"];
+      DioError error = e as DioError;
+      // print(error.response);
+      MotionToast.error(
+        description:  Text(error.response!.data["message"].toString()),
+      ).show(context);
+      // message = error.response!.data["message"];
       emit(SignUpResultState());
 
     }

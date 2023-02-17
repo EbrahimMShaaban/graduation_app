@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_app1/models/User.dart';
+import 'package:motion_toast/motion_toast.dart';
 import '../../shared/network/remote/dio_helper.dart';
 import '../../shared/network/remote/end_points.dart';
 import 'loginstates.dart';
-
+import 'package:flutter/material.dart';
 class LoginCubit extends Cubit<LoginStates> {
   LoginCubit() : super(LoginInitalState());
 
@@ -38,8 +39,12 @@ class LoginCubit extends Cubit<LoginStates> {
       }
       print(response);
     } catch (e) {
-      //DioError error = e as DioError;
+      DioError error = e as DioError;
       // print(error.response);
+      MotionToast.error(
+        description:  Text(error.response!.data["message"].toString()),
+      ).show(context);
+
       print(e);
     //  message = error.response!.data["message"];
       emit(LoginResultState());
