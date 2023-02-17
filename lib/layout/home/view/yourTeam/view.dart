@@ -23,7 +23,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
   @override
   bool _isShown = true;
 
-  void _delete(BuildContext context,TeamStates state) {
+  void _delete(BuildContext context, TeamStates state) {
     showDialog(
         context: context,
         builder: (BuildContext ctx) {
@@ -42,18 +42,15 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
                             _isShown = false;
 
                             print(state);
+                          });
+                          TeamCubit.get(context).DeletMyTeam(context);
 
-
-                          });TeamCubit.get(context).DeletMyTeam(context);
-
-                            print("يااااااااااااااااااارب");        print(state);
-                            print("يااااااااااااااااااارب");
-                            print("يااااااااااااااااااارب");        print(state);
-                            print("يااااااااااااااااااارب");
-
-
-
-
+                          print("يااااااااااااااااااارب");
+                          print(state);
+                          print("يااااااااااااااااااارب");
+                          print("يااااااااااااااااااارب");
+                          print(state);
+                          print("يااااااااااااااااااارب");
                         },
                         child: const Text(
                           'Yes',
@@ -70,7 +67,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
         });
   }
 
-  Widget screenView(MyTeam? data,TeamStates state) {
+  Widget screenView(MyTeam? data, TeamStates state) {
     return SafeArea(
         child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
@@ -81,19 +78,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
             data!.team.attributes.title,
             style: boldStyle.apply(fontSizeDelta: -9),
           ),
-          // SizedBox(
-          //   height: 20,
-          // ),
-          // Text(
-          //   'Team Name :',
-          //   style: mediumStyle,
-          // ),
-          //
-          // // name leader //////////////////////////////////////////////////
-          // Text(
-          //   data!.team.attributes.title,
-          //   style: labelStyle,
-          // ),
+
           SizedBox(
             height: 25,
           ),
@@ -112,7 +97,6 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
           //Team Needs
 
           Expanded(
-
             child: Align(
               alignment: FractionalOffset.bottomCenter,
               child: Button(state, data),
@@ -173,7 +157,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
         return Scaffold(
           body: state is MyTeamSuccessState
               // TeamCubit.get(context).createTeamModel !=null
-              ? screenView(TeamCubit.get(context).myTeam, state )
+              ? screenView(TeamCubit.get(context).myTeam, state)
               : Center(child: CircularProgressIndicator()),
         );
       },

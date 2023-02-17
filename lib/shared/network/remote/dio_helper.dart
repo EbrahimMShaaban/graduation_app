@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:motion_toast/motion_toast.dart';
 
 import './end_points.dart';
+import 'package:flutter/material.dart';
 
 class DioHelper {
   static late Dio dio;
@@ -11,6 +13,9 @@ class DioHelper {
         BaseOptions(
             receiveDataWhenStatusError: true,
             baseUrl: BASEURL,
+            // receiveTimeout: 5000,
+            // sendTimeout: 5000,
+            // connectTimeout: 5000,
             headers: {"Accept": "application/json"}),
       );
     } catch (e) {
@@ -44,10 +49,7 @@ class DioHelper {
         options: Options(headers: headers));
   }
 
-  static Future<Response> deletedata({
-    required String url,
-    headers
-  }) async {
+  static Future<Response> deletedata({required String url, headers}) async {
     return await dio.delete(
       url,
       options: Options(headers: headers),

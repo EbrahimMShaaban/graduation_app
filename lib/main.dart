@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,19 +13,20 @@ import 'shared/network/remote/dio_helper.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() async {
-
-
-
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   await DioHelper.init();
   await DioHelper.init();
   await CacheHelper.init();
   final Widget startWidget;
   token = CacheHelper.getData(key: 'token');
   myName = CacheHelper.getData(key: 'name');
-  team_id = CacheHelper.getData(key:'team_id');
+  team_id = CacheHelper.getData(key: 'team_id');
 
-    if (token != null) {
+  if (token != null) {
     startWidget = LeaderWelcomePage();
     print(team_id);
     print(token);
@@ -43,8 +43,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-
-    final Widget startWidget;
+  final Widget startWidget;
 
   const MyApp({
     required this.startWidget,
@@ -64,7 +63,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (BuildContext context) => TeamCubit()
-          //..getMyTeam()
+            //..getMyTeam()
             // ..getMyTeam()
             // ..getAllTeams(),
 

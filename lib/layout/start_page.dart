@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_app1/layout/sign_up_page.dart';
+import 'package:login_app1/shared/components/navigator.dart';
 import 'package:login_app1/shared/styles/colors.dart';
 import 'package:login_app1/shared/styles/styles.dart';
 
@@ -23,7 +24,7 @@ class StartPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ButtonTemplate(
-                  color: Color.fromARGB(255, 61, 151, 181),
+                  color: AppColors.button,
                   text1: "Sign Up",
                   text2: " as a ",
                   text3: "Team Leader",
@@ -36,7 +37,7 @@ class StartPage extends StatelessWidget {
                   height: spaceBetweenButtons,
                 ),
                 ButtonTemplate(
-                  color: Color.fromARGB(255, 61, 151, 181),
+                  color: AppColors.button,
                   text1: "Sign in",
                   onPressed: () {
                     Navigator.push(context,
@@ -75,8 +76,7 @@ class StartPage extends StatelessWidget {
                 TextButton(
 
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => BrowseView()));
+                    navigateTo(context, BrowseView());
                     },
                     child: RichText(
                       text: TextSpan(
@@ -91,20 +91,11 @@ class StartPage extends StatelessWidget {
                             )
                           ]),
                     ))
-                // ButtonTemplate(
-                //   color: Color.fromARGB(255, 61, 151, 181),
-                //   text1: "Sign Up",
-                //   text2: " as a ",
-                //   text3: "Team Leader",
-                //   onPressed: () {
-                //     Navigator.push(context,
-                //         MaterialPageRoute(builder: (context) => SignUpPage()));
-                //   },
-                // ),
+
               ],
             ),
           ),
-          BottomText(),
+        //  BottomText(),
           SizedBox(
             height: 20,
           )

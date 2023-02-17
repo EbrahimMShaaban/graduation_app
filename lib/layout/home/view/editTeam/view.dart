@@ -23,7 +23,7 @@ class _EditTeamState extends State<EditTeam> {
   TextEditingController teamMembers = TextEditingController();
 
   TextEditingController teamNeeds = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String dropdownValue = "credit";
 
   @override
@@ -261,13 +261,7 @@ class _EditTeamState extends State<EditTeam> {
                                 color: AppColors.blue,
                                 container: true,
                               ),
-                              // ConditionalBuilder(
-                              //   condition: ,
-                              //   builder: (context) =>
-                              //   fallback: (context) => const Center(
-                              //     child: CircularProgressIndicator(),
-                              //   ),
-                              // ),
+
                             ],
                           ),
                         ),

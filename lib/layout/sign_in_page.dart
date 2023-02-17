@@ -16,13 +16,14 @@ class SignInPage extends StatelessWidget {
   double spaceBetweenButtons = 20;
   var email = TextEditingController();
   var password = TextEditingController();
-  GlobalKey formkey = GlobalKey();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => LoginCubit(),
       child: Form(
+         key: formKey,
         child: Scaffold(
           appBar: AppBar(),
           body: Column(
@@ -43,11 +44,29 @@ class SignInPage extends StatelessWidget {
                     TextFieldTemplate(
                       hintText: "Email",
                       controller: email,
+                      validator: (String? value) {
+                        if (value!.isEmpty) {
+                          return 'Please Write Email';
+                        } else if (value.length < 5) {
+                          return 'Please write the email correctly';
+                        } else if (!value.toString().contains('@')) {
+                          return ' Email should contain \'@';
+                        }
+                        return null;
+                      },
                     ),
                     TextFieldTemplate(
                       hintText: "Password",
                       controller: password,
                       obscureText: true,
+                      validator: (String? value) {
+                        if (value!.isEmpty) {
+                          return 'Please Write password';
+                        }else if (value.length<6){
+                          return 'password must more than 6 charcters';
+                        }
+                        return null;
+                      },
                     ),
                     SizedBox(
                       height: spaceBetweenButtons,
@@ -76,32 +95,27 @@ class SignInPage extends StatelessWidget {
                             minwidth: 190,
                             text1: "Sign In",
                             onPressed: () async {
-                              logincubit
-                                  .postLogInDetails(
-                                      context: context,
-                                      email: email.text,
-                                      password: password.text)
-                                  .then((value) {
-                            //    if (value == "done") {
-                                CacheHelper.saveData(
-                                    key: 'token', value: User.token);
-                                CacheHelper.saveData(
-                                    key: 'name', value: User.name);
-                                CacheHelper.saveData(
-                                    key: 'team_id', value: User.team_id);
+                              if(formKey.currentState!.validate()){
+                                logincubit
+                                    .postLogInDetails(
+                                    context: context,
+                                    email: email.text,
+                                    password: password.text)
+                                    .then((value) {
+                                  //    if (value == "done") {
+                                  CacheHelper.saveData(
+                                      key: 'token', value: User.token);
+                                  CacheHelper.saveData(
+                                      key: 'name', value: User.name);
+                                  CacheHelper.saveData(
+                                      key: 'team_id', value: User.team_id);
 
-                                navigateAndFinished(context,LeaderWelcomePage());
+                                  navigateAndFinished(
+                                      context, LeaderWelcomePage());
 
 
-                            //       Navigator.push(
-                            //           context,
-                            //           MaterialPageRoute(
-                            //               builder: (context) =>
-                            //                   LeaderWelcomePage()));
-                                // } else if (value != "done") {
-                                //   showMyDialog(logincubit.message, context);
-                                // }
-                              });
+                                });
+                              }
                             },
                           );
                         }
@@ -110,7 +124,7 @@ class SignInPage extends StatelessWidget {
                   ],
                 ),
               ),
-              BottomText(),
+          //    BottomText(),
               SizedBox(
                 height: 20,
               )
