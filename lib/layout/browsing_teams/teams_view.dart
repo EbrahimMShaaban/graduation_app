@@ -5,6 +5,7 @@ import 'package:login_app1/layout/home/cubit/team_cubit.dart';
 import 'package:login_app1/models/allteams_model.dart';
 import 'package:login_app1/shared/components/components.dart';
 import 'package:login_app1/shared/components/constants.dart';
+import 'package:login_app1/shared/components/navigator.dart';
 import 'package:login_app1/shared/styles/styles.dart';
 
 class TeamView extends StatelessWidget {
@@ -51,15 +52,12 @@ class TeamView extends StatelessWidget {
                                         name:
                                             "${teamCubit?.teams?[index].attributes!.title}",
                                         onPressed: () {
-                                          Navigator.of(context).pushReplacement(
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      TeamDiscription(
-                                                        allTeams: teamCubit
-                                                            ?.teams?[index],
-                                                        // teams:
-                                                        //     teamCubit?.teams!?[index],
-                                                      )));
+                                         navigateTo(context, TeamDiscription(
+                                           allTeams: teamCubit
+                                               ?.teams?[index],
+                                           // teams:
+                                           //     teamCubit?.teams!?[index],
+                                         ));
                                         });
                                   }),
                             ),

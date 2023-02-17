@@ -43,16 +43,15 @@ class SignUpCubit extends Cubit<SignUpState> {
         myName = response.data["user"]["attributes"]["name"];
         token = response.data["token"];
         User.name = response.data["user"]["attributes"]["name"];
-
-
         User.email = response.data["user"]["attributes"]["email"];
         User.token = response.data["token"];
-
         message = "done";
 
         emit(SignUpSuccessState());
+
       }
       print(response);
+
     } catch (e) {
      // DioError error = e as DioError;
       print(e);
@@ -61,8 +60,7 @@ class SignUpCubit extends Cubit<SignUpState> {
       MotionToast.error(
         description:  Text(error.response!.data["message"].toString()),
       ).show(context);
-
-     // message = error.response!.data["message"];
+      // message = error.response!.data["message"];
       emit(SignUpResultState());
 
     }

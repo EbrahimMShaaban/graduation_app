@@ -27,90 +27,105 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
     showDialog(
         context: context,
         builder: (BuildContext ctx) {
-          return state is DeletLoadingtState
-              ? Center(child: CircularProgressIndicator())
-              : AlertDialog(
-                  title: const Text('Remove your team \n Are you sure?'),
-                  // content: const Text('Are you sure to remove the box?'),
-                  actions: [
-                    // The "Yes" button
-                    TextButton(
-                        onPressed: () {
-                          // Remove the box
+          return AlertDialog(
+            title: const Text('Remove your team \n Are you sure?'),
+            // content: const Text('Are you sure to remove the box?'),
+            actions: [
+              // The "Yes" button
+              TextButton(
+                  onPressed: () {
+                    // Remove the box
 
-                          setState(() {
-                            _isShown = false;
+                    setState(() {
+                      _isShown = false;
 
-                            print(state);
-                          });
-                          TeamCubit.get(context).DeletMyTeam(context);
+                      print(state);
+                    });
+                    TeamCubit.get(context).DeletMyTeam(context);
 
-                          print("يااااااااااااااااااارب");
-                          print(state);
-                          print("يااااااااااااااااااارب");
-                          print("يااااااااااااااااااارب");
-                          print(state);
-                          print("يااااااااااااااااااارب");
-                        },
-                        child: const Text(
-                          'Yes',
-                          style: TextStyle(color: Colors.red),
-                        )),
-                    TextButton(
-                        onPressed: () {
-                          // Close the dialog
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text('No'))
-                  ],
-                );
+                    print("يااااااااااااااااااارب");
+                    print(state);
+                    print("يااااااااااااااااااارب");
+                    print("يااااااااااااااااااارب");
+                    print(state);
+                    print("يااااااااااااااااااارب");
+
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    'Yes',
+                    style: TextStyle(color: Colors.red),
+                  )),
+              TextButton(
+                  onPressed: () {
+                    // Close the dialog
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('No'))
+            ],
+          );
         });
   }
 
   Widget screenView(MyTeam? data, TeamStates state) {
     return SafeArea(
         child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            data!.team.attributes.title,
-            style: boldStyle.apply(fontSizeDelta: -9),
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(child: ListView(
+                children: [
+                  Text(
+                    data!.team.attributes.title,
+                    style: boldStyle.apply(fontSizeDelta: -9),
+                  ),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
+                  // Text(
+                  //   'Team Name :',
+                  //   style: mediumStyle,
+                  // ),
+                  //
+                  // // name leader //////////////////////////////////////////////////
+                  // Text(
+                  //   data!.team.attributes.title,
+                  //   style: labelStyle,
+                  // ),
+                  SizedBox(
+                    height: 25,
+                  ),
 
-          SizedBox(
-            height: 25,
-          ),
+                  Text(
+                    'Team Description :',
+                    style: mediumStyle,
+                  ),
 
-          Text(
-            'Team Description :',
-            style: mediumStyle,
-          ),
+                  // Team member
+                  Text(
+                    data.team.attributes.body,
+                    style: labelStyle,
+                  ),
+                ],
+              )),
 
-          // Team member
-          Text(
-            data.team.attributes.body,
-            style: labelStyle,
-          ),
+              //Team Needs
 
-          //Team Needs
+              Align(
+                alignment: FractionalOffset.bottomCenter,
+                child: Button(state, data),
+              ),
 
-          Expanded(
-            child: Align(
-              alignment: FractionalOffset.bottomCenter,
-              child: Button(state, data),
-            ),
+              //Button
+            ],
           ),
-          //Button
-        ],
-      ),
-    ));
+        ));
   }
 
   Widget Button(TeamStates state, MyTeam data) {
     return Container(
-      height: MediaQuery.of(context).size.height / 5,
+      height: 60,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -146,8 +161,13 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
   }
 
   @override
+  void initState() {
+    BlocProvider.of<TeamCubit>(context).getMyTeam();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    TeamCubit.get(context).getMyTeam();
     return BlocConsumer<TeamCubit, TeamStates>(
       listener: (context, state) {
         print(state);
@@ -156,7 +176,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
       builder: (context, state) {
         return Scaffold(
           body: state is MyTeamSuccessState
-              // TeamCubit.get(context).createTeamModel !=null
+          // TeamCubit.get(context).createTeamModel !=null
               ? screenView(TeamCubit.get(context).myTeam, state)
               : Center(child: CircularProgressIndicator()),
         );

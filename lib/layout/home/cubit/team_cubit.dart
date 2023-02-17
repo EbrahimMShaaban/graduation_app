@@ -32,6 +32,7 @@ class TeamCubit extends Cubit<TeamStates> {
 //   emit(typeChangeState());
 // }
 
+
   MyTeam? myTeam;
   AllTeams? allTeamsmodel;
   CreateTeamModel? createTeamModel;
