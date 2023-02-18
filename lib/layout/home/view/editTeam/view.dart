@@ -61,6 +61,14 @@ class _EditTeamState extends State<EditTeam> {
               child: TextFormField(
                 textAlignVertical: TextAlignVertical.top,
                 controller: teamMembers,
+                validator: (String? value) {
+                  if (value!.isEmpty) {
+                    return 'Please Write name ';
+                  } else if (value.length < 3) {
+                    return 'The name should consist of at least 3 letters.';
+                  }
+                  return null;
+                },
                 style: TextStyle(
                     fontSize: 20,
                     height: 1.5,
@@ -160,12 +168,13 @@ class _EditTeamState extends State<EditTeam> {
             textAlignVertical: TextAlignVertical.top,
             controller: teamNeeds,
 
-            validator: (value) {
+            validator: (String? value) {
               if (value!.isEmpty) {
-                return "Dddddddddddd";
-              } else {
-                return null;
+                return 'Please Write description ';
+              } else if (value.length < 10) {
+                return 'The description should consist of at least 10 letters.';
               }
+              return null;
             },
             style: TextStyle(
                 fontSize: 20,
@@ -217,7 +226,7 @@ class _EditTeamState extends State<EditTeam> {
                         if (state is UpdataTeamLoadingtState)
                           LinearProgressIndicator(),
                         Text(
-                          'Edit a team',
+                          'Edit your team',
                           style: boldStyle,
                         ),
                         const SizedBox(
@@ -253,10 +262,15 @@ class _EditTeamState extends State<EditTeam> {
                                   : TextInkWell(
                                 text: "Submit",
                                 onTap: () {
-                                  TeamCubit.get(context).EditTeam(
-                                      teamMembers: teamMembers.text,
-                                      teamNeeds: teamNeeds.text,
-                                      type: dropdownValue);
+                                  if(formKey.currentState!.validate()){
+                                    TeamCubit.get(context).EditTeam(
+                                        teamMembers: teamMembers.text,
+                                        teamNeeds: teamNeeds.text,
+                                        type: dropdownValue,
+                                      context: context
+                                    );
+
+                                  }
                                 },
                                 color: AppColors.blue,
                                 container: true,

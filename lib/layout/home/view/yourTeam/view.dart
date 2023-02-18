@@ -70,57 +70,61 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
   Widget screenView(MyTeam? data, TeamStates state) {
     return SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+              child: ListView(
             children: [
-              Expanded(child: ListView(
-                children: [
-                  Text(
-                    data!.team.attributes.title,
-                    style: boldStyle.apply(fontSizeDelta: -9),
-                  ),
-                  // SizedBox(
-                  //   height: 20,
-                  // ),
-                  // Text(
-                  //   'Team Name :',
-                  //   style: mediumStyle,
-                  // ),
-                  //
-                  // // name leader //////////////////////////////////////////////////
-                  // Text(
-                  //   data!.team.attributes.title,
-                  //   style: labelStyle,
-                  // ),
-                  SizedBox(
-                    height: 25,
-                  ),
-
-                  Text(
-                    'Team Description :',
-                    style: mediumStyle,
-                  ),
-
-                  // Team member
-                  Text(
-                    data.team.attributes.body,
-                    style: labelStyle,
-                  ),
-                ],
-              )),
-
-              //Team Needs
-
-              Align(
-                alignment: FractionalOffset.bottomCenter,
-                child: Button(state, data),
+              Center(
+                child: Text(
+                  data!.team.attributes.title,
+                  style: boldStyle.apply(
+                      fontSizeDelta: -9, color: AppColors.background),
+                ),
+              ),
+              // SizedBox(
+              //   height: 20,
+              // ),
+              // Text(
+              //   'Team Name :',
+              //   style: mediumStyle,
+              // ),
+              //
+              // // name leader //////////////////////////////////////////////////
+              // Text(
+              //   data!.team.attributes.title,
+              //   style: labelStyle,
+              // ),
+              SizedBox(
+                height: 25,
               ),
 
-              //Button
+              Text(
+                'Team Description :',
+                style: mediumStyle,
+              ),
+
+              // Team member
+              Text(
+                data.team.attributes.body,
+                style: labelStyle,
+              ),
             ],
+          )),
+
+          //Team Needs
+
+          Align(
+            alignment: FractionalOffset.bottomCenter,
+            child: Button(state, data),
           ),
-        ));
+
+          //Button
+        ],
+      ),
+    ));
   }
 
   Widget Button(TeamStates state, MyTeam data) {
@@ -176,7 +180,7 @@ class _YourTeamScreenState extends State<YourTeamScreen> {
       builder: (context, state) {
         return Scaffold(
           body: state is MyTeamSuccessState
-          // TeamCubit.get(context).createTeamModel !=null
+              // TeamCubit.get(context).createTeamModel !=null
               ? screenView(TeamCubit.get(context).myTeam, state)
               : Center(child: CircularProgressIndicator()),
         );
