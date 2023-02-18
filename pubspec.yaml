@@ -50,12 +50,12 @@ flutter_native_splash:
     image: "assets/images/grads-logo.png"
     icon_background_color: "#ffffff"
 
-
-
-
-
   flutter_launcher_icons: "^0.11.0"
-
+flutter_icons:
+  android: "launcher_icon"
+#  ios: true
+  image_path: "assets/images/grads-logo-white.png"
+  min_sdk_android: 21 #
   flutter_test:
     sdk: flutter
 

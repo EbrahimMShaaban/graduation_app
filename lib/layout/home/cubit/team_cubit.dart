@@ -157,22 +157,27 @@ class TeamCubit extends Cubit<TeamStates> {
   }
 
   void EditTeam({
-    required String teamMembers,
+    required String teamname,
     required String type,
     required String teamNeeds,
     required context,
   }) async {
-    print(teamMembers);
+    print(teamname);
     print(teamNeeds);
     print(Type);
     emit(UpdataTeamLoadingtState());
+    final dataWithTeam ={
+      "title":  teamname ,
+      "body": teamNeeds,
+      "type": type,
+    };
+    final dataWithOutTeam ={
+      "body": teamNeeds,
+      "type": type,
+    };
     await DioHelper.postdata(
       url: myTeams + team_id,
-      posteddata: {
-        "title": teamMembers,
-        "body": teamNeeds,
-        "type": type,
-      },
+      posteddata:teamname != myTeam?.team.attributes.title? dataWithTeam :dataWithOutTeam,
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',

@@ -264,7 +264,7 @@ class _EditTeamState extends State<EditTeam> {
                                 onTap: () {
                                   if(formKey.currentState!.validate()){
                                     TeamCubit.get(context).EditTeam(
-                                        teamMembers: teamMembers.text,
+                                        teamname: teamMembers.text,
                                         teamNeeds: teamNeeds.text,
                                         type: dropdownValue,
                                       context: context
