@@ -67,6 +67,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
+          title: 'Grads',
           theme: ThemeData(
               scaffoldBackgroundColor: Colors.white,
               primaryColor: primarycolor,

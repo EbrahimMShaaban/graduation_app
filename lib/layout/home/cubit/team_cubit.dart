@@ -199,6 +199,7 @@ class TeamCubit extends Cubit<TeamStates> {
       print(error.toString());
 
       emit(UpdataTeamErrorState());
+
     });
   }
 }
